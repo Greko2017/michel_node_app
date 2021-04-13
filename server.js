@@ -25,18 +25,12 @@ app.post('/upload', (req, res) => {
     fs.createReadStream(`${__dirname}/client/public/uploads/${file.name}`)
     .pipe(csv({ separator: ';' }))
     .on('data', (data)=>{
-      console.log(`data`, data)
-      let tmp = {
-        gl_date:data['GL Date'],
-        abr:data['Abr'],
-        parent_acc_nature_view:data['Parent Account for Nature View'],
-        currency:data['Currency'],
-        actual_amount:data['Actual\nAmount']
-      }
-      result.push(tmp)
+      // console.log(`data`, data)
+      
+      result.push(data)
     })
     .on('end',()=>{
-      console.log(`result`, result)
+      // console.log(`result`, result)
       res.json({ fileName: file.name, filePath: `/uploads/${file.name}`,CsvDataList:result });
     })
 
