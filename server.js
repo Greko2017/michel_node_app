@@ -16,13 +16,13 @@ app.post('/upload', (req, res) => {
 
   const file = req.files.file;
 
-  file.mv(`${__dirname}/client/public/uploads/${file.name}`, err => {
+  file.mv(`${__dirname}/${file.name}`, err => {
     if (err) {
       console.error(err);
       return res.status(500).send(err);
     }
 
-    fs.createReadStream(`${__dirname}/client/public/uploads/${file.name}`)
+    fs.createReadStream(`${__dirname}/${file.name}`)
     .pipe(csv({ separator: ';' }))
     .on('data', (data)=>{
       // console.log(`data`, data)
@@ -30,7 +30,7 @@ app.post('/upload', (req, res) => {
       result.push(data)
     })
     .on('end',()=>{
-      // console.log(`result`, result)
+      console.log(`result:>>`, result)
       res.json({ fileName: file.name, filePath: `/uploads/${file.name}`,CsvDataList:result });
     })
 
@@ -45,7 +45,7 @@ app.get('/data', (req, res) => {
 
   const file = req.files.file;
 
-  file.mv(`${__dirname}/client/public/uploads/${file.name}`, err => {
+  file.mv(`${__dirname}/${file.name}`, err => {
     if (err) {
       console.error(err);
       return res.status(500).send(err);

@@ -1,11 +1,4 @@
 import React, { Component } from 'react'
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 
   
 
@@ -25,33 +18,35 @@ class TableList extends Component {
     const { tableData }=this.props
 
         return (
-            <TableContainer component={Paper}>
-              <Table style={{minWidth: 650,}} aria-label="simple table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>GL Date</TableCell>
-                    <TableCell align="right">Abr</TableCell>
-                    <TableCell align="right">Parent Account for Nature View</TableCell>
-                    <TableCell align="right">Currency</TableCell>
-                    <TableCell align="right">Actual Amount</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {tableData.map((row) => (
-                    <TableRow key={row.name}>
-                      <TableCell component="th" scope="row">
-                        {row.name}
-                      </TableCell>
-                      <TableCell align="right">{row.gl_date}</TableCell>
-                      <TableCell align="right">{row.abr}</TableCell>
-                      <TableCell align="right">{row.parent_acc_nature_view}</TableCell>
-                      <TableCell align="right">{row.currency}</TableCell>
-                      <TableCell align="right">{row.actual_amount}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
+          <div className='row mt-5'>
+          
+          <table className="table">
+            <caption>Exported File Data</caption>
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">GL Date</th>
+                <th scope="col">Abr</th>
+                <th scope="col">Parent Account for Nature View</th>
+                <th scope="col">Actual Amount</th>
+                <th scope="col">Currency</th>
+              </tr>
+            </thead>
+            <tbody>
+              {tableData.map((row,index) => (
+                <tr key={index}>
+                    <th scope="row">{index}</th>
+                    <th>{row.gl_date}</th>
+                    <th>{row.abr}</th>
+                    <th>{row.parent_acc_nature_view}</th>
+                    <th>{row.actual_amount}</th>
+                    <th>{row.currency}</th>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        
+          </div>
         )
     }
 }

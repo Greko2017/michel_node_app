@@ -1,5 +1,4 @@
-﻿Gl_Date;Abr;Parent Account for Nature View;Currency;"Actual
-Amount"
+﻿gl_date;Abr;Parent Account for Nature View;Currency;actual_amount
 24/04/2020;Apr;093 - FixedAssets;EUR;-35 063,27
 24/04/2020;Apr;106 - AccumDepreciation;EUR;35 063,27
 janv-20;Jan;164 - AP;XAF;282,03
@@ -11,16 +10,16 @@ janv-20;Jan;164 - AP;XAF;5 232,19
 06/01/2020;Jan;012 - ReceivTradeBill;USD;-3 604,58
 06/01/2020;Jan;012 - ReceivTradeBill;USD;-199,22
 06/01/2020;Jan;012 - ReceivTradeBill;USD;-650,04
-06/01/2020;Jan;012 - ReceivTradeBill;USD;-78,90
+06/01/2020;Jan;012 - ReceivTradeBill;USD;-78,9
 06/01/2020;Jan;012 - ReceivTradeBill;XAF;-1 372,37
 06/01/2020;Jan;012 - ReceivTradeBill;XAF;-242,17
 09/01/2020;Jan;012 - ReceivTradeBill;XAF;-1 985,15
 09/01/2020;Jan;012 - ReceivTradeBill;XAF;-350,31
 29/01/2020;Jan;012 - ReceivTradeBill;XAF;-740,22
 29/01/2020;Jan;012 - ReceivTradeBill;XAF;-130,62
-30/01/2020;Jan;012 - ReceivTradeBill;XAF;-738,20
+30/01/2020;Jan;012 - ReceivTradeBill;XAF;-738,2
 30/01/2020;Jan;012 - ReceivTradeBill;XAF;-130,27
-30/01/2020;Jan;012 - ReceivTradeBill;USD;-0,90
+30/01/2020;Jan;012 - ReceivTradeBill;USD;-0,9
 31/01/2020;Jan;012 - ReceivTradeBill;USD;-5 113,11
 31/01/2020;Jan;012 - ReceivTradeBill;USD;-1 430,23
 12/02/2020;Feb;012 - ReceivTradeBill;USD;-24 089,25
@@ -47,7 +46,7 @@ janv-20;Jan;164 - AP;XAF;5 232,19
 27/03/2020;Mar;012 - ReceivTradeBill;XAF;-25,03
 27/03/2020;Mar;012 - ReceivTradeBill;USD;-57 865,04
 27/03/2020;Mar;012 - ReceivTradeBill;USD;-10 211,48
-30/03/2020;Mar;026 - TotICRecPay;USD;-57,30
+30/03/2020;Mar;026 - TotICRecPay;USD;-57,3
 31/03/2020;Mar;012 - ReceivTradeBill;USD;-1 242,39
 31/03/2020;Mar;012 - ReceivTradeBill;USD;-251,34
 08/04/2020;Apr;012 - ReceivTradeBill;USD;-9 479,98
@@ -66,14 +65,14 @@ janv-20;Jan;164 - AP;XAF;5 232,19
 01/04/2020;Apr;012 - ReceivTradeBill;USD;-5 112,84
 01/04/2020;Apr;012 - ReceivTradeBill;USD;-717,53
 20/04/2020;Apr;012 - ReceivTradeBill;XAF;-342,81
-20/04/2020;Apr;012 - ReceivTradeBill;XAF;-60,50
+20/04/2020;Apr;012 - ReceivTradeBill;XAF;-60,5
 22/04/2020;Apr;012 - ReceivTradeBill;USD;-1 083,58
-24/04/2020;Apr;012 - ReceivTradeBill;XAF;-799,90
+24/04/2020;Apr;012 - ReceivTradeBill;XAF;-799,9
 24/04/2020;Apr;012 - ReceivTradeBill;XAF;-141,16
 24/04/2020;Apr;012 - ReceivTradeBill;XAF;-7 622,50
 27/04/2020;Apr;012 - ReceivTradeBill;USD;-106,95
 27/04/2020;Apr;012 - ReceivTradeBill;USD;-21,01
-27/04/2020;Apr;012 - ReceivTradeBill;USD;-12,10
+27/04/2020;Apr;012 - ReceivTradeBill;USD;-12,1
 27/04/2020;Apr;012 - ReceivTradeBill;USD;-233,13
 27/04/2020;Apr;012 - ReceivTradeBill;USD;-41,14
 28/04/2020;Apr;012 - ReceivTradeBill;USD;-32,61
@@ -103,8 +102,8 @@ janv-20;Jan;164 - AP;XAF;5 232,19
 29/05/2020;May;026 - TotICRecPay;USD;-99,78
 29/05/2020;May;012 - ReceivTradeBill;USD;-26 869,97
 29/05/2020;May;012 - ReceivTradeBill;USD;-4 741,73
-08/06/2020;Jun;012 - ReceivTradeBill;USD;-5,50
-09/06/2020;Jun;012 - ReceivTradeBill;USD;-852,30
+08/06/2020;Jun;012 - ReceivTradeBill;USD;-5,5
+09/06/2020;Jun;012 - ReceivTradeBill;USD;-852,3
 23/06/2020;Jun;012 - ReceivTradeBill;USD;-1 328,72
 23/06/2020;Jun;012 - ReceivTradeBill;USD;-259,68
 02/06/2020;Jun;012 - ReceivTradeBill;USD;-142,75
@@ -165,7 +164,7 @@ janv-20;Jan;164 - AP;XAF;-274,41
 janv-20;Jan;164 - AP;XAF;-681,43
 janv-20;Jan;164 - AP;XAF;412,67
 janv-20;Jan;164 - AP;XAF;-13,72
-janv-20;Jan;164 - AP;XAF;-609,80
+janv-20;Jan;164 - AP;XAF;-609,8
 janv-20;Jan;164 - AP;XAF;-69,52
 janv-20;Jan;164 - AP;XAF;187,28
 janv-20;Jan;164 - AP;XAF;219,52
@@ -185,13 +184,13 @@ janv-20;Jan;164 - AP;XAF;723,14
 janv-20;Jan;164 - AP;XAF;457,35
 janv-20;Jan;164 - AP;XAF;1 609,11
 janv-20;Jan;164 - AP;XAF;2,18
-janv-20;Jan;164 - AP;XAF;15,50
+janv-20;Jan;164 - AP;XAF;15,5
 janv-20;Jan;164 - AP;XAF;3,77
 janv-20;Jan;164 - AP;XAF;30,84
 janv-20;Jan;164 - AP;XAF;-61,74
 janv-20;Jan;164 - AP;XAF;-560,66
 janv-20;Jan;164 - AP;XAF;-753,12
-janv-20;Jan;164 - AP;XAF;-63,80
+janv-20;Jan;164 - AP;XAF;-63,8
 janv-20;Jan;164 - AP;XAF;-147,21
 janv-20;Jan;164 - AP;XAF;-1 037,57
 janv-20;Jan;164 - AP;XAF;-754,54
@@ -204,13 +203,13 @@ janv-20;Jan;164 - AP;XAF;560,66
 janv-20;Jan;164 - AP;XAF;387,01
 janv-20;Jan;164 - AP;XAF;-500,26
 janv-20;Jan;164 - AP;XAF;-6 738,31
-janv-20;Jan;164 - AP;XAF;-130,50
-janv-20;Jan;164 - AP;XAF;-63,80
-janv-20;Jan;164 - AP;XAF;-255,20
+janv-20;Jan;164 - AP;XAF;-130,5
+janv-20;Jan;164 - AP;XAF;-63,8
+janv-20;Jan;164 - AP;XAF;-255,2
 janv-20;Jan;164 - AP;XAF;-26,68
 janv-20;Jan;164 - AP;XAF;-4 573,50
 janv-20;Jan;164 - AP;XAF;-679,32
-janv-20;Jan;164 - AP;USD;-352,70
+janv-20;Jan;164 - AP;USD;-352,7
 janv-20;Jan;164 - AP;USD;-9 314,01
 janv-20;Jan;164 - AP;XAF;-681,43
 janv-20;Jan;164 - AP;XAF;-13,72
@@ -219,19 +218,19 @@ janv-20;Jan;164 - AP;XAF;-5 145,19
 janv-20;Jan;164 - AP;XAF;-64,03
 janv-20;Jan;164 - AP;XAF;-90,71
 janv-20;Jan;164 - AP;XAF;-7 779,52
-janv-20;Jan;164 - AP;XAF;609,80
+janv-20;Jan;164 - AP;XAF;609,8
 janv-20;Jan;164 - AP;XAF;69,52
 janv-20;Jan;164 - AP;XAF;681,43
 janv-20;Jan;164 - AP;XAF;13,72
 janv-20;Jan;164 - AP;XAF;29 525,46
-janv-20;Jan;164 - AP;XAF;-147,20
+janv-20;Jan;164 - AP;XAF;-147,2
 févr-20;Feb;164 - AP;XAF;-497,79
 févr-20;Feb;164 - AP;XAF;-500,26
 févr-20;Feb;164 - AP;XAF;500,26
 févr-20;Feb;164 - AP;XAF;-109,75
 févr-20;Feb;164 - AP;XAF;-274,41
 févr-20;Feb;164 - AP;XAF;-4 284,21
-févr-20;Feb;164 - AP;XAF;-880,40
+févr-20;Feb;164 - AP;XAF;-880,4
 févr-20;Feb;164 - AP;XAF;-43,36
 févr-20;Feb;164 - AP;XAF;-64,59
 févr-20;Feb;164 - AP;XAF;-58,68
@@ -239,16 +238,16 @@ févr-20;Feb;164 - AP;XAF;-101,38
 févr-20;Feb;164 - AP;XAF;274,41
 févr-20;Feb;164 - AP;XAF;-382,53
 févr-20;Feb;164 - AP;XAF;382,53
-févr-20;Feb;164 - AP;XAF;127,60
-févr-20;Feb;164 - AP;XAF;510,40
+févr-20;Feb;164 - AP;XAF;127,6
+févr-20;Feb;164 - AP;XAF;510,4
 févr-20;Feb;164 - AP;XAF;138,79
 févr-20;Feb;164 - AP;XAF;179,88
-févr-20;Feb;164 - AP;XAF;130,50
+févr-20;Feb;164 - AP;XAF;130,5
 févr-20;Feb;164 - AP;XAF;471,95
 févr-20;Feb;164 - AP;XAF;5 745,77
 févr-20;Feb;164 - AP;XAF;497,79
 févr-20;Feb;164 - AP;XAF;11 022,52
-févr-20;Feb;164 - AP;XAF;880,40
+févr-20;Feb;164 - AP;XAF;880,4
 févr-20;Feb;164 - AP;XAF;387,01
 févr-20;Feb;164 - AP;XAF;7 779,52
 févr-20;Feb;164 - AP;XAF;679,32
@@ -265,7 +264,7 @@ févr-20;Feb;164 - AP;XAF;-382,02
 févr-20;Feb;164 - AP;XAF;-302,02
 févr-20;Feb;164 - AP;XAF;-407,35
 févr-20;Feb;164 - AP;XAF;-138,04
-févr-20;Feb;164 - AP;XAF;-24,40
+févr-20;Feb;164 - AP;XAF;-24,4
 févr-20;Feb;164 - AP;XAF;-1 634,96
 févr-20;Feb;164 - AP;XAF;-1 634,96
 févr-20;Feb;164 - AP;XAF;251,54
@@ -288,9 +287,9 @@ mars-20;Mar;164 - AP;XAF;-689,92
 mars-20;Mar;164 - AP;USD;-11 441,92
 mars-20;Mar;164 - AP;XAF;-501,62
 mars-20;Mar;164 - AP;XAF;1 889,26
-mars-20;Mar;164 - AP;XAF;-952,20
+mars-20;Mar;164 - AP;XAF;-952,2
 mars-20;Mar;164 - AP;XAF;-184,01
-mars-20;Mar;164 - AP;XAF;121,50
+mars-20;Mar;164 - AP;XAF;121,5
 mars-20;Mar;164 - AP;XAF;59,14
 mars-20;Mar;164 - AP;XAF;689,92
 mars-20;Mar;164 - AP;XAF;8 470,70
@@ -329,7 +328,7 @@ mars-20;Mar;164 - AP;XAF;-32,02
 mars-20;Mar;164 - AP;XAF;109,75
 10/02/2020;Feb;012 - ReceivTradeBill;USD;68 076,52
 mars-20;Mar;164 - AP;XAF;32,02
-13/02/2020;Feb;012 - ReceivTradeBill;XAF;369,70
+13/02/2020;Feb;012 - ReceivTradeBill;XAF;369,7
 mars-20;Mar;164 - AP;XAF;-32,02
 16/01/2020;Jan;026 - TotICRecPay;USD;-4 950,14
 13/02/2020;Feb;012 - ReceivTradeBill;USD;1 650,34
@@ -337,7 +336,7 @@ mars-20;Mar;164 - AP;XAF;-82,33
 13/02/2020;Feb;012 - ReceivTradeBill;USD;9 756,12
 mars-20;Mar;164 - AP;XAF;-22,87
 13/02/2020;Feb;012 - ReceivTradeBill;USD;1 731,15
-13/02/2020;Feb;012 - ReceivTradeBill;XAF;369,70
+13/02/2020;Feb;012 - ReceivTradeBill;XAF;369,7
 mars-20;Mar;164 - AP;XAF;-1 366,05
 13/02/2020;Feb;012 - ReceivTradeBill;USD;1 912,73
 mars-20;Mar;164 - AP;XAF;-184,01
@@ -357,7 +356,7 @@ mars-20;Mar;164 - AP;XAF;184,01
 27/02/2020;Feb;012 - ReceivTradeBill;USD;31 135,50
 mars-20;Mar;164 - AP;XAF;32,02
 27/02/2020;Feb;012 - ReceivTradeBill;USD;31 135,50
-mars-20;Mar;164 - AP;XAF;952,20
+mars-20;Mar;164 - AP;XAF;952,2
 27/02/2020;Feb;012 - ReceivTradeBill;USD;5 652,94
 28/02/2020;Feb;026 - TotICRecPay;XAF;1 979,87
 mars-20;Mar;164 - AP;XAF;22,87
@@ -371,8 +370,8 @@ mars-20;Mar;164 - AP;XAF;
 mars-20;Mar;164 - AP;XAF;
 31/03/2020;Mar;026 - TotICRecPay;USD;183,97
 30/01/2020;Jan;026 - TotICRecPay;USD;-243,39
-31/03/2020;Mar;026 - TotICRecPay;XAF;59,00
-31/03/2020;Mar;026 - TotICRecPay;XAF;236,30
+31/03/2020;Mar;026 - TotICRecPay;XAF;59
+31/03/2020;Mar;026 - TotICRecPay;XAF;236,3
 mars-20;Mar;164 - AP;XAF;-13,81
 06/04/2020;Apr;012 - ReceivTradeBill;USD;16 543,20
 06/02/2020;Feb;026 - TotICRecPay;USD;-1 126,16
@@ -405,7 +404,7 @@ mars-20;Mar;164 - AP;XAF;-501,62
 08/06/2020;Jun;012 - ReceivTradeBill;USD;-1 042,48
 mars-20;Mar;164 - AP;USD;-12 231,02
 08/06/2020;Jun;012 - ReceivTradeBill;USD;-123 888,51
-mars-20;Mar;164 - AP;XAF;-116,70
+mars-20;Mar;164 - AP;XAF;-116,7
 11/06/2020;Jun;012 - ReceivTradeBill;XAF;-279,05
 mars-20;Mar;164 - AP;XAF;82,33
 11/06/2020;Jun;012 - ReceivTradeBill;XAF;279,05
