@@ -10,7 +10,7 @@ class TableList extends Component {
     };
 
     componentDidMount(){
-        console.log('this.props :>> ', this.props);
+        console.log('In componentDidMount this.props :>> ', this.props);
     }
     
 
