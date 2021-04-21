@@ -18,7 +18,6 @@ export const importDataReducer = (state = initialState, action) => {
                 ...state,
                 loading: true,
                 import_data:[],
-                tm_import_data:state.import_data
             };
         case IMPORT_DATA_SUCCESS:
             
@@ -49,7 +48,6 @@ export const importDataReducer = (state = initialState, action) => {
                 return {
                     ...state,
                     loading: false,
-                    import_data: state.tm_import_data,
                     error: action.payload,
                     tm_import_data:[]
                 };
