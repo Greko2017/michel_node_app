@@ -1,5 +1,5 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import Message from './Message';
+import React, {  useEffect, useState } from 'react';
+// import Message from './Message';
 import { connect } from 'react-redux'
 import { editImportData } from '../redux';
 
@@ -14,11 +14,6 @@ import { editImportData } from '../redux';
       setYearToCompute(currentYear)
         // Met à jour le titre du document via l’API du navigateur
         const {import_data} = props.import_data
-        // console.log('import_data :>> ', import_data);
-        // let tmp_tableData = localStorage.getItem('tableData')
-        // if (tmp_tableData!==null){
-        //   loadData(tmp_tableData)
-        // }
         let tmp_tableData = localStorage.getItem('tableData')
         // console.log(`In FileUpload props:>>`,props,tmp_tableData)
         if (tmp_tableData!==null){
@@ -213,20 +208,20 @@ console.log('bsStaticDataTable :>> ', bsStaticDataTable);
                 <h3>12 Months {()=>renderBsData(yearToCompute)}</h3>
               </div>
                 
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div className="dropdown">
+              <button className="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Select year 
               </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+              <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
                     {Object.keys(computedStaticDataTable.new||{}).map((year,i)=>(
-                       <button class="dropdown-item" onClick={()=>{handleYearChanged(year)}} key={i} type="button">{year}</button>
+                       <button className="dropdown-item" onClick={()=>{handleYearChanged(year)}} key={i} type="button">{year}</button>
                     ))}
               </div>
             </div>
 
           </div>
           
-          <table className="table">
+          <table className="table table-bordered table-sm">
             <caption>Imported BS&L Data</caption>
             <thead>
               <tr>
@@ -258,7 +253,7 @@ console.log('bsStaticDataTable :>> ', bsStaticDataTable);
               })
             }
             {bsStaticDataTable['total'] !==undefined ?(
-              <tr key={'BS total'}>
+              <tr className="thead-light" key={'BS total'}>
                   <th>{'Total'}</th><th>{bsStaticDataTable['total']['01']||0}</th><th>{bsStaticDataTable['total']['02']||0}</th><th>{bsStaticDataTable['total']['03']||0}</th><th>{bsStaticDataTable['total']['04']||0}</th><th>{bsStaticDataTable['total']['05']||0}</th><th>{bsStaticDataTable['total']['06']||0}</th><th>{bsStaticDataTable['total']['07']||0}</th><th>{bsStaticDataTable['total']['08']||0}</th><th>{bsStaticDataTable['total']['09']||0}</th><th>{bsStaticDataTable['total']['10']||0}</th><th>{bsStaticDataTable['total']['11']||0}</th><th>{bsStaticDataTable['total']['02']||0}</th><th>{bsStaticDataTable['total']['gran-total']}</th>
               </tr>
             ):(<></>)
@@ -268,7 +263,7 @@ console.log('bsStaticDataTable :>> ', bsStaticDataTable);
 
           
 
-          <table className="table">
+          <table className="table table-bordered table-sm">
             <caption>Imported P&L Data</caption>
             <thead>
               <tr>

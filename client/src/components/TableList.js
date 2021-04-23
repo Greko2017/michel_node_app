@@ -20,7 +20,7 @@ class TableList extends Component {
         return (
           <div className='row mt-5'>
           
-          <table className="table">
+          <table className="table table-bordered table-sm">
             <caption>Exported File Data</caption>
             <thead>
               <tr>
