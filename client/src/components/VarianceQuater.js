@@ -2,8 +2,7 @@ import React, {  useEffect, useState } from 'react';
 import { connect } from 'react-redux'
 
 import { editImportData } from '../redux';
-
-const CompareMonths = (props) => {
+export const VarianceQuater = (props) => {
     const [years, setYears] =useState([])
     const [selectedOptions,setSelectedOptions] =useState({month1:{},month2:{}})
     const [computedStaticDataTable, setComputedStaticDataTable]=useState({})
@@ -22,20 +21,19 @@ const CompareMonths = (props) => {
           }
       
           innerLoadData()
-          const {resultComputeCompareBS,resultComputeComparePL} = computeCompareMonth(selectedOptions)
+          const {resultComputeCompareBS,resultComputeComparePL} = computeCompareQuater(selectedOptions)
           setBsCompareMonthsData(resultComputeCompareBS)
           setPlCompareMonthsData(resultComputeComparePL)
     }, [selectedOptions]);
 
-    const convertMonthLtrToNbr=(letter)=>{
-      // console.log('letter :>> ', letter);
-      return letter === 'Jan'?'01':letter === 'Feb'?'02':letter === 'Mar'?'03':letter === 'Apr'?'04':letter === 'May'?'05':letter === 'Jun'?'06':letter === 'Jul'?'07':letter === 'Aug'?'08':letter === 'Sep'?'09':letter === 'Oct'?'10':letter === 'Nov'?'11':letter === 'Dec'?'12':undefined
+    const convertQuaterLtrToNbrs=(letter)=>{
+      return letter === 'Q1'?['01','02','03']:letter === 'Q2'?['04','05','06']:letter === 'Q3'?['07','08','09']:letter === 'Q4'?['10','11','12']:[]
     }
 
-    const computeCompareMonth = (selectedOptions)=>{
-      // console.log('selectedOptions :>> ', selectedOptions, computedStaticDataTable);
-      let month1 = convertMonthLtrToNbr(selectedOptions.month1.month)
-      let month2 = convertMonthLtrToNbr(selectedOptions.month2.month)
+    const computeCompareQuater = (selectedOptions)=>{
+      console.log('selectedOptions :>> ', selectedOptions, computedStaticDataTable);
+      let month1 = convertQuaterLtrToNbrs(selectedOptions.month1.month)
+      let month2 = convertQuaterLtrToNbrs(selectedOptions.month2.month)
       let year1 = selectedOptions.month1.year
       let year2 = selectedOptions.month2.year
 
@@ -71,13 +69,26 @@ const CompareMonths = (props) => {
         let tem_value = {...previousValue}
         tem_value[currKey]= tem_value[currKey] || {}
         tem_value[currKey]['month1'] = tem_value[currKey]['month1']  || {}
-        // console.log('currKey,month1,month2 :>> ', computedStaticDataTable,currKey,year1,year2,month1,month2);
+        
         computedStaticDataTable[year1]['balance_sheet'] = computedStaticDataTable[year1]['balance_sheet'] || {}
         computedStaticDataTable[year2]['balance_sheet'] = computedStaticDataTable[year2]['balance_sheet'] || {}
-        tem_value[currKey]['month1']= computedStaticDataTable[year1]['balance_sheet'][currKey][month1] || 0
-        tem_value[currKey]['month2']= computedStaticDataTable[year2]['balance_sheet'][currKey][month2] || 0
-        tem_value[currKey]['variance']= parseFloat((tem_value[currKey]['month1'] - tem_value[currKey]['month2']).toFixed(2))
+        tem_value[currKey]['month1']= month1.reduce((prev, currMont1)=>{
+          // console.log('prev :>> ', prev);
+          let currValue = computedStaticDataTable[year1]['balance_sheet'][currKey][currMont1] || 0
+          let sum = prev+currValue
+          // console.log('prev :>> ', prev);
+          // console.log('sum :>> ', sum);
+            return parseFloat(sum.toFixed(2))
+        },0)
 
+        tem_value[currKey]['month2']= month2.reduce((prev, currMont2)=>{
+          let currValue = computedStaticDataTable[year1]['balance_sheet'][currKey][currMont2] || 0
+          let sum = prev+currValue
+          return parseFloat(sum.toFixed(2))
+        },0)
+
+
+        tem_value[currKey]['variance']= parseFloat((tem_value[currKey]['month1'] - tem_value[currKey]['month2']).toFixed(2))
         let percentage_variance = 0
         let sign = Math.sign(tem_value[currKey]['variance'])
         if (tem_value[currKey]['month2'] === 0 ){
@@ -96,13 +107,7 @@ const CompareMonths = (props) => {
           percentage_variance = tem_value[currKey]['variance'] / tem_value[currKey]['month2']
         }
         tem_value[currKey]['percentage_variance'] = parseFloat(percentage_variance.toFixed(2))
-        console.log('sign :>> ', sign);
-        // console.log('tem_value[currKey]["variance"] :>> ', tem_value[currKey]['variance']);
-        // console.log('tem_value[currKey]["month2"] :>> ', tem_value[currKey]['month2']);
-        // console.log('percentage_variance :>> ', percentage_variance);
-        // console.log('tem_value[currKey]["month1"] :>> ', tem_value[currKey]['month1']);
-        // console.log('tem_value[currKey]["month2"] :>> ', tem_value[currKey]['month2']);
-        // console.log('différence :>> ', tem_value[currKey]['month1'] - tem_value[currKey]['month2']);
+        
         return tem_value
       },{})
 
@@ -294,24 +299,24 @@ const compute12monthData =(origin_staticDataTable)=>{
         if (value[0] ==='1'){
           newSelectedOptions['month1'] = {'month':value[1], 'year':year}
           if ( Object.values(newSelectedOptions['month2']).length <= 0 ){
-            newSelectedOptions['month2'] = {'month':'Jan', 'year':year}
+            newSelectedOptions['month2'] = {'month':'Q1', 'year':year}
           }
           setSelectedOptions(newSelectedOptions)
         }
         if (value[0] ==='2'){
           newSelectedOptions['month2'] = {'month':value[1], 'year':year}
           if (Object.values(newSelectedOptions['month1']).length <= 0 ){
-            newSelectedOptions['month1'] = {'month':'Jan', 'year':year}
+            newSelectedOptions['month1'] = {'month':'Q1', 'year':year}
           }
           setSelectedOptions(newSelectedOptions)
         }
-        // computeCompareMonth(selectedOptions)
+        // computeCompareQuater(selectedOptions)
       // }
       // innerHandleChange(event)
 
         // computeMonthsCompareData(props.import_data)
     }
-    const monthDropDownValues = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+    const quatersDropDownValues = ['Q1','Q2','Q3','Q4']
     return (
         <div>
             <form className="form-inline">
@@ -320,7 +325,7 @@ const compute12monthData =(origin_staticDataTable)=>{
                     <label htmlFor="month1">Month 1</label>
                     <select onChange={handleChange} className="form-control ml-2" id="month1" style={{minWidth:60}}>
 
-                    {monthDropDownValues.map((month,i)=>{
+                    {quatersDropDownValues.map((month,i)=>{
                         return (
                         <option value={`1,${month}`} key={i}>{month}</option>
                         )
@@ -340,7 +345,7 @@ const compute12monthData =(origin_staticDataTable)=>{
                 <div className="form-group">
                     <label htmlFor="month2">Month 2</label>
                     <select onChange={handleChange} className="form-control ml-2" id="month2" style={{minWidth:60}}>
-                    {monthDropDownValues.map((month,i)=>{
+                    {quatersDropDownValues.map((month,i)=>{
                         
                         return (
                         <option value={`2,${month}`} key={i}>{month}</option>
@@ -371,8 +376,8 @@ const compute12monthData =(origin_staticDataTable)=>{
                 <th style={{borderRightColor:"#fff"}}></th>
                 <th style={{borderRightColor:"#fff"}}></th>
                 <th ></th>
-                <th scope="col">{selectedOptions.month1.month || 'Jan'}</th>
-                <th scope="col">{selectedOptions.month2.month || 'Jan'}</th>
+                <th scope="col">{selectedOptions.month1.month || 'Q1'}</th>
+                <th scope="col">{selectedOptions.month2.month || 'Q1'}</th>
                 <th scope="col">variance</th>
                 <th scope="col">variance %</th>
                 </tr>
@@ -411,8 +416,8 @@ const compute12monthData =(origin_staticDataTable)=>{
                 <th style={{borderRightColor:"#fff"}}></th>
                 <th style={{borderRightColor:"#fff"}}></th>
                 <th ></th>
-                <th scope="col">{selectedOptions.month1.month || 'Jan'}</th>
-                <th scope="col">{selectedOptions.month2.month || 'Jan'}</th>
+                <th scope="col">{selectedOptions.month1.month || 'Q1'}</th>
+                <th scope="col">{selectedOptions.month2.month || 'Q1'}</th>
                 <th scope="col">variance</th>
                 <th scope="col">variance %</th>
                 </tr>
@@ -444,8 +449,8 @@ const compute12monthData =(origin_staticDataTable)=>{
 }
 
 
+
 const mapStateToProps = (state) => {
-    // console.log('state :>> ', state);
     return {
       import_data: state.import_data,
     };
@@ -457,4 +462,4 @@ const mapStateToProps = (state) => {
     };
   };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CompareMonths)
+export default connect(mapStateToProps, mapDispatchToProps)(VarianceQuater)

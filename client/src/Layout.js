@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { NavLink, } from "react-router-dom";
+import { Link,NavLink } from "react-router-dom";
 
 class Layout extends Component {
     render() {
@@ -25,7 +25,7 @@ class Layout extends Component {
                       <NavLink className="nav-link" to="/difference_month">Month</NavLink>
                     </li>
                     <li className="nav-item">
-                      <NavLink className="nav-link" to="/difference_quater">Quater</NavLink>
+                      <NavLink className="nav-link" to="/variance_quater">Quater</NavLink>
                     </li>
                   </ul>
                   <form className="form-inline mt-2 mt-md-0">
