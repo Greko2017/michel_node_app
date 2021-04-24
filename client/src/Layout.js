@@ -9,23 +9,23 @@ class Layout extends Component {
               <header>
               
               <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-                <NavLink className="navbar-brand" style={{color:'#fff'}} to="#">MNA</NavLink>
+                <a className="navbar-brand" style={{color:'#fff'}} href="/">MNA</a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                   <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarCollapse">
                   <ul className="navbar-nav mr-auto">
                     <li className="nav-item active">
-                      <NavLink className="nav-link" to="/">Home <span className="sr-only">(current)</span></NavLink>
+                      <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
                     </li>
                     <li className="nav-item">
-                      <NavLink className="nav-link" to="/twelves_months">12 Months</NavLink>
+                      <a className="nav-link" href="/twelves_months">12 Months</a>
                     </li>
                     <li className="nav-item">
-                      <NavLink className="nav-link" to="/difference_month">Month</NavLink>
+                      <a className="nav-link" href="/difference_month">Month</a>
                     </li>
                     <li className="nav-item">
-                      <NavLink className="nav-link" to="/variance_quater">Quater</NavLink>
+                      <a className="nav-link" href="/variance_quater">Quater</a>
                     </li>
                   </ul>
                   <form className="form-inline mt-2 mt-md-0">
