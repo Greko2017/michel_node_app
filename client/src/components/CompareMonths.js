@@ -46,7 +46,7 @@ const CompareMonths = (props) => {
         // console.log('tmp_balance_sheet_keys :>> ', tmp_balance_sheet_keys);
         balance_sheet_keys = Object.keys(computedStaticDataTable[year2]['balance_sheet']).reduce((newArray, item,index) => {
                     if (index===0){newArray = [...tmp_balance_sheet_keys]}
-                    console.log('newArray :>> ', newArray);
+                    // console.log('newArray :>> ', newArray);
                     if (newArray.includes(item)) {
                       return newArray
                     }else {
@@ -71,15 +71,35 @@ const CompareMonths = (props) => {
         let tem_value = {...previousValue}
         tem_value[currKey]= tem_value[currKey] || {}
         tem_value[currKey]['month1'] = tem_value[currKey]['month1']  || {}
-        console.log('currKey,month1,month2 :>> ', computedStaticDataTable,currKey,year1,year2,month1,month2);
+        // console.log('currKey,month1,month2 :>> ', computedStaticDataTable,currKey,year1,year2,month1,month2);
         computedStaticDataTable[year1]['balance_sheet'] = computedStaticDataTable[year1]['balance_sheet'] || {}
         computedStaticDataTable[year2]['balance_sheet'] = computedStaticDataTable[year2]['balance_sheet'] || {}
         tem_value[currKey]['month1']= computedStaticDataTable[year1]['balance_sheet'][currKey][month1] || 0
         tem_value[currKey]['month2']= computedStaticDataTable[year2]['balance_sheet'][currKey][month2] || 0
         tem_value[currKey]['variance']= parseFloat((tem_value[currKey]['month1'] - tem_value[currKey]['month2']).toFixed(2))
 
-        tem_value[currKey]['variance_percentage'] = tem_value[currKey]['month2'] !== 0 ? tem_value[currKey]['month1']/ tem_value[currKey]['variance'] : 'N/A'
-        tem_value[currKey]['variance_percentage'] = parseFloat((tem_value[currKey]['variance_percentage']).toFixed(2))
+        let percentage_variance = 0
+        let sign = Math.sign(tem_value[currKey]['variance'])
+        if (tem_value[currKey]['month2'] === 0 ){
+          if (tem_value[currKey]['month1'] === 0 && tem_value[currKey]['month2'] === 0){
+            percentage_variance = 0
+          }else{
+              if(sign===1 || sign===0){ 
+                percentage_variance = 100
+              }
+              else{
+                percentage_variance = -100
+              }
+          }
+        } 
+        else{
+          percentage_variance = tem_value[currKey]['variance'] / tem_value[currKey]['month2']
+        }
+        tem_value[currKey]['percentage_variance'] = parseFloat(percentage_variance.toFixed(2))
+        console.log('sign :>> ', sign);
+        console.log('tem_value[currKey]["variance"] :>> ', tem_value[currKey]['variance']);
+        console.log('tem_value[currKey]["month2"] :>> ', tem_value[currKey]['month2']);
+        console.log('percentage_variance :>> ', percentage_variance);
         // console.log('tem_value[currKey]["month1"] :>> ', tem_value[currKey]['month1']);
         // console.log('tem_value[currKey]["month2"] :>> ', tem_value[currKey]['month2']);
         // console.log('différence :>> ', tem_value[currKey]['month1'] - tem_value[currKey]['month2']);
@@ -338,87 +358,87 @@ const compute12monthData =(origin_staticDataTable)=>{
                     </select>
                 </div>
                 
-                <button type="submit" className="btn btn-primary ml-2">Compute</button>
+                {/* <button type="submit" className="btn btn-primary ml-2">Compute</button> */}
             </form>
             
-            <table className="table table-bordered mt-5">
-                <caption>Balance Sheet Difference</caption>
-                <thead>
-                    <tr>
-                    <th scope="col" style={{borderRightColor:"#fff"}}>Balance Sheet</th>
-                    <th style={{borderRightColor:"#fff"}}></th>
-                    <th style={{borderRightColor:"#fff"}}></th>
-                    <th style={{borderRightColor:"#fff"}}></th>
-                    <th style={{borderRightColor:"#fff"}}></th>
-                    <th ></th>
-                    <th scope="col">Jan</th>
-                    <th scope="col">Feb</th>
-                    <th scope="col">variance</th>
-                    <th scope="col">variance %</th>
-                    </tr>
-                </thead>
-                <tbody>
+        <table className="table table-bordered mt-5">
+            <caption>Balance Sheet Difference</caption>
+            <thead>
+                <tr>
+                <th scope="col" style={{borderRightColor:"#fff"}}>Balance Sheet</th>
+                <th style={{borderRightColor:"#fff"}}></th>
+                <th style={{borderRightColor:"#fff"}}></th>
+                <th style={{borderRightColor:"#fff"}}></th>
+                <th style={{borderRightColor:"#fff"}}></th>
+                <th ></th>
+                <th scope="col">{selectedOptions.month1.month || 'Jan'}</th>
+                <th scope="col">{selectedOptions.month2.month || 'Jan'}</th>
+                <th scope="col">variance</th>
+                <th scope="col">variance %</th>
+                </tr>
+            </thead>
+            <tbody>
 
-                        
-                    {bsCompareMonthsData !== undefined && selectedOptions.month1.year !== undefined  && Object.keys(bsCompareMonthsData) instanceof Array ?
-                    (
-                        Object.keys(bsCompareMonthsData).map((oneKey,i)=>{
-                            if (oneKey.includes('total')){return;}
-                            return (
-                                <tr key={i}>
-                                    <th scope="row" colSpan="6">{oneKey}</th>
-                                    <td>{bsCompareMonthsData[oneKey]['month1'] || 0}</td>
-                                    <td>{bsCompareMonthsData[oneKey]['month2'] || 0}</td>
-                                    <td>{bsCompareMonthsData[oneKey]['variance']}</td>
-                                    <td>{bsCompareMonthsData[oneKey]['variance_percentage']}</td>
-                                </tr>
-                            )
-                        })
-                    ):(null)
-                    }
                     
-                </tbody>
-                </table>
-                <br/>
+                {bsCompareMonthsData !== undefined && selectedOptions.month1.year !== undefined  && Object.keys(bsCompareMonthsData) instanceof Array ?
+                (
+                    Object.keys(bsCompareMonthsData).map((oneKey,i)=>{
+                        if (oneKey.includes('total')){return;}
+                        return (
+                            <tr key={i}>
+                                <th scope="row" colSpan="6">{oneKey}</th>
+                                <td>{bsCompareMonthsData[oneKey]['month1'] || 0}</td>
+                                <td>{bsCompareMonthsData[oneKey]['month2'] || 0}</td>
+                                <td>{bsCompareMonthsData[oneKey]['variance']}</td>
+                                <td>{bsCompareMonthsData[oneKey]['percentage_variance']}</td>
+                            </tr>
+                        )
+                    })
+                ):(null)
+                }
                 
-            <table className="table table-bordered mt-5">
-                <caption>P&L Difference</caption>
-                <thead>
-                    <tr>
-                    <th scope="col" style={{borderRightColor:"#fff"}}>P&L</th>
-                    <th style={{borderRightColor:"#fff"}}></th>
-                    <th style={{borderRightColor:"#fff"}}></th>
-                    <th style={{borderRightColor:"#fff"}}></th>
-                    <th style={{borderRightColor:"#fff"}}></th>
-                    <th ></th>
-                    <th scope="col">Jan</th>
-                    <th scope="col">Feb</th>
-                    <th scope="col">variance</th>
-                    <th scope="col">variance %</th>
-                    </tr>
-                </thead>
-                <tbody>
+            </tbody>
+            </table>
+        <br/>
+            
+        <table className="table table-bordered mt-5">
+            <caption>P&L Difference</caption>
+            <thead>
+                <tr>
+                <th scope="col" style={{borderRightColor:"#fff"}}>P&L</th>
+                <th style={{borderRightColor:"#fff"}}></th>
+                <th style={{borderRightColor:"#fff"}}></th>
+                <th style={{borderRightColor:"#fff"}}></th>
+                <th style={{borderRightColor:"#fff"}}></th>
+                <th ></th>
+                <th scope="col">{selectedOptions.month1.month || 'Jan'}</th>
+                <th scope="col">{selectedOptions.month2.month || 'Jan'}</th>
+                <th scope="col">variance</th>
+                <th scope="col">variance %</th>
+                </tr>
+            </thead>
+            <tbody>
 
-                        
-                    {plCompareMonthsData !== undefined && selectedOptions.month1.year !== undefined  && Object.keys(plCompareMonthsData) instanceof Array ?
-                    (
-                        Object.keys(plCompareMonthsData).map((oneKey,i)=>{
-                            if (oneKey.includes('total')){return;}
-                            return (
-                                <tr key={i}>
-                                    <th scope="row" colSpan="6">{oneKey}</th>
-                                    <td>{plCompareMonthsData[oneKey]['month1'] || 0}</td>
-                                    <td>{plCompareMonthsData[oneKey]['month2'] || 0}</td>
-                                    <td>{bsCompareMonthsData[oneKey]['variance']}</td>
-                                    <td>{bsCompareMonthsData[oneKey]['variance_percentage']}</td>
-                                </tr>
-                            )
-                        })
-                    ):(null)
-                    }
                     
-                </tbody>
-                </table>
+                {plCompareMonthsData !== undefined && selectedOptions.month1.year !== undefined  && Object.keys(plCompareMonthsData) instanceof Array ?
+                (
+                    Object.keys(plCompareMonthsData).map((oneKey,i)=>{
+                        if (oneKey.includes('total')){return;}
+                        return (
+                            <tr key={i}>
+                                <th scope="row" colSpan="6">{oneKey}</th>
+                                <td>{plCompareMonthsData[oneKey]['month1'] || 0}</td>
+                                <td>{plCompareMonthsData[oneKey]['month2'] || 0}</td>
+                                <td>{bsCompareMonthsData[oneKey]['variance']}</td>
+                                <td>{bsCompareMonthsData[oneKey]['variance_percentage']}</td>
+                            </tr>
+                        )
+                    })
+                ):(null)
+                }
+                
+            </tbody>
+            </table>
         </div>
     )
 }
