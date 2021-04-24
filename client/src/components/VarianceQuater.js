@@ -17,6 +17,11 @@ export const VarianceQuater = (props) => {
                 await props.editImportData(loaded_tableData)
                 // console.log('inside result :>> ', loaded_tableData);
                 await computeMonthsCompareData(loaded_tableData)
+
+                
+                let selectedOptions = localStorage.getItem('SelectedOptionsVariance') || '{month1:{},month2:{}}'
+                let loadedSelectedOptions = await JSON.parse(selectedOptions)
+                setSelectedOptions(loadedSelectedOptions)
             }
           }
       
@@ -301,14 +306,20 @@ const compute12monthData =(origin_staticDataTable)=>{
           if ( Object.values(newSelectedOptions['month2']).length <= 0 ){
             newSelectedOptions['month2'] = {'month':'Q1', 'year':year}
           }
-          setSelectedOptions(newSelectedOptions)
+          setSelectedOptions(prevValue => {
+            localStorage.setItem('SelectedOptionsVariance',JSON.stringify(newSelectedOptions))
+            return newSelectedOptions
+          })
         }
         if (value[0] ==='2'){
           newSelectedOptions['month2'] = {'month':value[1], 'year':year}
           if (Object.values(newSelectedOptions['month1']).length <= 0 ){
             newSelectedOptions['month1'] = {'month':'Q1', 'year':year}
           }
-          setSelectedOptions(newSelectedOptions)
+          setSelectedOptions(prevValue => {
+            localStorage.setItem('SelectedOptionsVariance',JSON.stringify(newSelectedOptions))
+            return newSelectedOptions
+          })
         }
         // computeCompareQuater(selectedOptions)
       // }

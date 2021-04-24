@@ -13,21 +13,19 @@ import { editImportData } from '../redux';
       var currentYear= new Date().getFullYear(); 
       setYearToCompute(currentYear)
         // Met à jour le titre du document via l’API du navigateur
-        const {import_data} = props.import_data
-        let tmp_tableData = localStorage.getItem('tableData')
-        // console.log(`In FileUpload props:>>`,props,tmp_tableData)
-        if (tmp_tableData!==null){
-          loadData(tmp_tableData)
+        
+        async function innerLoadData() {
+          const {import_data} = props.import_data
+          if (import_data.length ===0) {
+              let tmp_tableData = localStorage.getItem('tableData') || '[]'
+              let loaded_tableData = await JSON.parse(tmp_tableData)
+              await props.editImportData(loaded_tableData)
+          }
         }
-        // console.log(`In TwelvesMonths import_data :>>`,props,import_data)
+        innerLoadData()
         computeDate()
       }, []);
     
-      const loadData = (_tableData) =>{
-        // console.log('In loadData :>> ', _tableData);
-        let tmp_tableData = JSON.parse(_tableData)
-        props.editImportData(tmp_tableData)
-    }
 
 const computeDate = ()=> {
   const {import_data} = props.import_data
