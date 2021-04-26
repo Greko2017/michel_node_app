@@ -12,16 +12,16 @@ export const VarianceQuater = (props) => {
         async function innerLoadData() {
             const {import_data} = props.import_data
             if (import_data.length ===0) {
-                let tmp_tableData = localStorage.getItem('tableData') || '[]'
-                let loaded_tableData = await JSON.parse(tmp_tableData)
-                await props.editImportData(loaded_tableData)
+                let tmp_tableData = await localStorage.getItem('tableData') || '[]'
+                let loaded_tableData = await JSON.parse(await tmp_tableData)
+                await props.editImportData(await loaded_tableData)
                 // console.log('inside result :>> ', loaded_tableData);
                 await computeMonthsCompareData(loaded_tableData)
 
                 
-                let selectedOptions = localStorage.getItem('SelectedOptionsVariance') || '{month1:{},month2:{}}'
-                let loadedSelectedOptions = await JSON.parse(selectedOptions)
-                setSelectedOptions(loadedSelectedOptions)
+                let selectedOptions = await localStorage.getItem('SelectedOptionsVariance') || '{month1:{},month2:{}}'
+                let loadedSelectedOptions = await JSON.parse(await selectedOptions)
+                setSelectedOptions(await loadedSelectedOptions)
             }
           }
       
@@ -123,8 +123,42 @@ export const VarianceQuater = (props) => {
         // console.log('currKey,month1,month2 :>> ', currKey,month1,month2);
         computedStaticDataTable[year1]['p_and_l'] = computedStaticDataTable[year1]['p_and_l'] || {}
         computedStaticDataTable[year2]['p_and_l'] = computedStaticDataTable[year2]['p_and_l'] || {}
-        tem_value[currKey]['month1']= computedStaticDataTable[year1]['p_and_l'][currKey][month1] || 0
-        tem_value[currKey]['month2']= computedStaticDataTable[year2]['p_and_l'][currKey][month2] || 0
+        tem_value[currKey]['month1']= month1.reduce((prev, currMont1)=>{
+          // console.log('prev :>> ', prev);
+          let currValue = computedStaticDataTable[year1]['p_and_l'][currKey][currMont1] || 0
+          let sum = prev+currValue
+          // console.log('prev :>> ', prev);
+          // console.log('sum :>> ', sum);
+            return parseFloat(sum.toFixed(2))
+        },0)
+
+        tem_value[currKey]['month2']= month2.reduce((prev, currMont2)=>{
+          let currValue = computedStaticDataTable[year1]['p_and_l'][currKey][currMont2] || 0
+          let sum = prev+currValue
+          return parseFloat(sum.toFixed(2))
+        },0)
+
+
+        tem_value[currKey]['variance']= parseFloat((tem_value[currKey]['month1'] - tem_value[currKey]['month2']).toFixed(2))
+        let percentage_variance = 0
+        let sign = Math.sign(tem_value[currKey]['variance'])
+        if (tem_value[currKey]['month2'] === 0 ){
+          if (tem_value[currKey]['month1'] === 0 && tem_value[currKey]['month2'] === 0){
+            percentage_variance = 0
+          }else{
+              if(sign===1 || sign===0){ 
+                percentage_variance = 100
+              }
+              else{
+                percentage_variance = -100
+              }
+          }
+        } 
+        else{
+          percentage_variance = tem_value[currKey]['variance'] / tem_value[currKey]['month2']
+        }
+        tem_value[currKey]['percentage_variance'] = parseFloat(percentage_variance.toFixed(2))
+        
         return tem_value
       },{})
       // console.log('resultComputeCompareBS,resultComputeComparePL :>> ', resultComputeCompareBS,resultComputeComparePL);
@@ -328,6 +362,7 @@ const compute12monthData =(origin_staticDataTable)=>{
         // computeMonthsCompareData(props.import_data)
     }
     const quatersDropDownValues = ['Q1','Q2','Q3','Q4']
+    console.log('bsCompareMonthsData,plCompareMonthsData :>> ', bsCompareMonthsData,plCompareMonthsData);
     return (
         <div>
             <form className="form-inline">
@@ -401,8 +436,8 @@ const compute12monthData =(origin_staticDataTable)=>{
                     Object.keys(bsCompareMonthsData).map((oneKey,i)=>{
                         if (oneKey.includes('total')){return;}
                         return (
-                            <tr key={i}>
-                                <th scope="row" colSpan="6">{oneKey.substring(4)}</th>
+                            <tr key={i} log={`${bsCompareMonthsData} ${oneKey}`}>
+                                <th scope="row" colSpan="6">{oneKey.substring(6)}</th>
                                 <td>{bsCompareMonthsData[oneKey]['month1'] || 0}</td>
                                 <td>{bsCompareMonthsData[oneKey]['month2'] || 0}</td>
                                 <td>{bsCompareMonthsData[oneKey]['variance']}</td>
@@ -439,14 +474,13 @@ const compute12monthData =(origin_staticDataTable)=>{
                 {plCompareMonthsData !== undefined && selectedOptions.month1.year !== undefined  && Object.keys(plCompareMonthsData) instanceof Array ?
                 (
                     Object.keys(plCompareMonthsData).map((oneKey,i)=>{
-                        if (oneKey.includes('total')){return;}
                         return (
                             <tr key={i}>
-                                <th scope="row" colSpan="6">{oneKey.substring(4)}</th>
+                                <th scope="row" colSpan="6">{oneKey.substring(6)}</th>
                                 <td>{plCompareMonthsData[oneKey]['month1'] || 0}</td>
                                 <td>{plCompareMonthsData[oneKey]['month2'] || 0}</td>
-                                <td>{bsCompareMonthsData[oneKey]['variance']}</td>
-                                <td>{bsCompareMonthsData[oneKey]['variance_percentage']}</td>
+                                <td>{plCompareMonthsData[oneKey]['variance']}</td>
+                                <td>{plCompareMonthsData[oneKey]['percentage_variance']}</td>
                             </tr>
                         )
                     })

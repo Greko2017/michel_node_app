@@ -18,7 +18,6 @@ const CompareMonths = (props) => {
                 await props.editImportData(loaded_tableData)
                 // console.log('inside result :>> ', loaded_tableData);
                 await computeMonthsCompareData(loaded_tableData)
-
                 
                 let selectedOptions = localStorage.getItem('SelectedOptions') || '{month1:{},month2:{}}'
                 let loadedSelectedOptions = await JSON.parse(selectedOptions)
@@ -101,13 +100,7 @@ const CompareMonths = (props) => {
           percentage_variance = tem_value[currKey]['variance'] / tem_value[currKey]['month2']
         }
         tem_value[currKey]['percentage_variance'] = parseFloat(percentage_variance.toFixed(2))
-        console.log('sign :>> ', sign);
-        // console.log('tem_value[currKey]["variance"] :>> ', tem_value[currKey]['variance']);
-        // console.log('tem_value[currKey]["month2"] :>> ', tem_value[currKey]['month2']);
-        // console.log('percentage_variance :>> ', percentage_variance);
-        // console.log('tem_value[currKey]["month1"] :>> ', tem_value[currKey]['month1']);
-        // console.log('tem_value[currKey]["month2"] :>> ', tem_value[currKey]['month2']);
-        // console.log('différence :>> ', tem_value[currKey]['month1'] - tem_value[currKey]['month2']);
+        
         return tem_value
       },{})
 
@@ -120,6 +113,27 @@ const CompareMonths = (props) => {
         computedStaticDataTable[year2]['p_and_l'] = computedStaticDataTable[year2]['p_and_l'] || {}
         tem_value[currKey]['month1']= computedStaticDataTable[year1]['p_and_l'][currKey][month1] || 0
         tem_value[currKey]['month2']= computedStaticDataTable[year2]['p_and_l'][currKey][month2] || 0
+        tem_value[currKey]['variance']= parseFloat((tem_value[currKey]['month1'] - tem_value[currKey]['month2']).toFixed(2))
+
+        let percentage_variance = 0
+        let sign = Math.sign(tem_value[currKey]['variance'])
+        if (tem_value[currKey]['month2'] === 0 ){
+          if (tem_value[currKey]['month1'] === 0 && tem_value[currKey]['month2'] === 0){
+            percentage_variance = 0
+          }else{
+              if(sign===1 || sign===0){ 
+                percentage_variance = 100
+              }
+              else{
+                percentage_variance = -100
+              }
+          }
+        } 
+        else{
+          percentage_variance = tem_value[currKey]['variance'] / tem_value[currKey]['month2']
+        }
+        tem_value[currKey]['percentage_variance'] = parseFloat(percentage_variance.toFixed(2))
+        
         return tem_value
       },{})
       // console.log('resultComputeCompareBS,resultComputeComparePL :>> ', resultComputeCompareBS,resultComputeComparePL);
@@ -397,7 +411,7 @@ const compute12monthData =(origin_staticDataTable)=>{
                         if (oneKey.includes('total')){return;}
                         return (
                             <tr key={i}>
-                                <th scope="row" colSpan="6">{oneKey.substring(4)}</th>
+                                <th scope="row" colSpan="6">{oneKey.substring(6)}</th>
                                 <td>{bsCompareMonthsData[oneKey]['month1'] || 0}</td>
                                 <td>{bsCompareMonthsData[oneKey]['month2'] || 0}</td>
                                 <td>{bsCompareMonthsData[oneKey]['variance']}</td>
@@ -434,14 +448,13 @@ const compute12monthData =(origin_staticDataTable)=>{
                 {plCompareMonthsData !== undefined && selectedOptions.month1.year !== undefined  && Object.keys(plCompareMonthsData) instanceof Array ?
                 (
                     Object.keys(plCompareMonthsData).map((oneKey,i)=>{
-                        if (oneKey.includes('total')){return;}
                         return (
                             <tr key={i}>
-                                <th scope="row" colSpan="6">{oneKey.substring(4)}</th>
+                                <th scope="row" colSpan="6">{oneKey.substring(6)}</th>
                                 <td>{plCompareMonthsData[oneKey]['month1'] || 0}</td>
                                 <td>{plCompareMonthsData[oneKey]['month2'] || 0}</td>
-                                <td>{bsCompareMonthsData[oneKey]['variance']}</td>
-                                <td>{bsCompareMonthsData[oneKey]['variance_percentage']}</td>
+                                <td>{plCompareMonthsData[oneKey]['variance']}</td>
+                                <td>{plCompareMonthsData[oneKey]['percentage_variance']}</td>
                             </tr>
                         )
                     })

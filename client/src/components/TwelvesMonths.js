@@ -10,26 +10,52 @@ import { editImportData } from '../redux';
     const [yearToCompute,setYearToCompute] =useState(false)
     const [computedStaticDataTable, setComputedStaticDataTable]=useState({})
     useEffect(() => {
-      var currentYear= new Date().getFullYear(); 
-      setYearToCompute(currentYear)
+      // var currentYear= new Date().getFullYear(); 
+      // setYearToCompute(prev=> { localStorage.setItem('innerYearToCompute',currentYear); return currentYear})
         // Met à jour le titre du document via l’API du navigateur
         
-        async function innerLoadData() {
-          const {import_data} = props.import_data
-          if (import_data.length ===0) {
-              let tmp_tableData = localStorage.getItem('tableData') || '[]'
-              let loaded_tableData = await JSON.parse(tmp_tableData)
-              await props.editImportData(loaded_tableData)
+        innerLoadData().then((innerComputedStaticDataTable)=>{
+          // console.log('innerComputedStaticDataTable :>> ', innerComputedStaticDataTable);
+          // console.log('innerComputedStaticDataTable.new['+yearToCompute+'] :>> ', innerComputedStaticDataTable.new[yearToCompute]);
+          if (innerComputedStaticDataTable.new[yearToCompute] !== undefined){
+            // console.log('innerComputedStaticDataTable.new['+yearToCompute+']["balance_sheet"] :>> ', innerComputedStaticDataTable.new[yearToCompute]['balance_sheet']);
+
+            setBsStaticDataTable(compute12monthData(innerComputedStaticDataTable.new[yearToCompute]['balance_sheet']||{}))
+            setPlStaticDataTable(compute12monthData(innerComputedStaticDataTable.new[yearToCompute]['p_and_l']||{}))
           }
+           return innerComputedStaticDataTable
+        }).then((innerComputedStaticDataTable)=>{
+          // console.log('in then innerComputedStaticDataTable :>> ', innerComputedStaticDataTable);
+        let innerYearToCompute = localStorage.getItem('innerYearToCompute') || false
+        if (innerYearToCompute!==false || innerYearToCompute===undefined ){
+          innerYearToCompute = JSON.parse(innerYearToCompute)
+        }else{
+          innerYearToCompute =yearToCompute
         }
-        innerLoadData()
-        computeDate()
+        // console.log('In then prepare innerYearToCompute :>> ', innerYearToCompute);
+        handleYearChanged(innerYearToCompute,innerComputedStaticDataTable)
+        
+        })
+        
+        handleYearChanged(yearToCompute)
       }, []);
     
 
-const computeDate = ()=> {
-  const {import_data} = props.import_data
-
+      async function innerLoadData() {
+      const {import_data} = props.import_data
+        if (import_data.length ===0) {
+            let tmp_tableData = localStorage.getItem('tableData') || '[]'
+            let loaded_tableData = await JSON.parse(tmp_tableData)
+            // console.log('loaded_tableData :>> ',loaded_tableData);
+            props.editImportData(loaded_tableData)
+            let computedStaticDataTable = await computeDate(loaded_tableData)
+            // console.log('computedStaticDataTable :>> ',computedStaticDataTable);
+            setComputedStaticDataTable(await computedStaticDataTable)
+            return computedStaticDataTable            
+        }
+      }
+const computeDate = (import_data)=> {
+    // console.log('--- In computeDate import_data :>> ', import_data);
     let computedStaticDataTable = import_data instanceof Array && import_data.length > 0 ? [...import_data].reduce((previousValue, currentValue)=>{
       
       // console.log('previousValue, currentValue :>> ', previousValue, currentValue);
@@ -95,16 +121,18 @@ const computeDate = ()=> {
         
       return {new:new_tmp_value, old:tmp_value}
     },{ old:{},new:{} }):{ old:{},new:{} }
-    setYearToCompute(Object.keys(computedStaticDataTable.new)[0])
-    setComputedStaticDataTable(computedStaticDataTable)
-    console.log('computedStaticDataTable :>> ', computedStaticDataTable,yearToCompute);
-    console.log('computedStaticDataTable.new['+yearToCompute+'] :>> ', computedStaticDataTable.new[yearToCompute]);
-    if (computedStaticDataTable.new[yearToCompute] !== undefined){
-      console.log('computedStaticDataTable.new['+yearToCompute+']["balance_sheet"] :>> ', computedStaticDataTable.new[yearToCompute]['balance_sheet']);
+    let firstYear = Object.keys(computedStaticDataTable.new)[0]
+    setYearToCompute(prev=>{localStorage.setItem('innerYearToCompute',firstYear); return firstYear})
+    // setComputedStaticDataTable(computedStaticDataTable)y
+    // console.log('computedStaticDataTable :>> ', computedStaticDataTable,yearToCompute);
+    return computedStaticDataTable
+    // console.log('computedStaticDataTable.new['+yearToCompute+'] :>> ', computedStaticDataTable.new[yearToCompute]);
+    // if (computedStaticDataTable.new[yearToCompute] !== undefined){
+    //   console.log('computedStaticDataTable.new['+yearToCompute+']["balance_sheet"] :>> ', computedStaticDataTable.new[yearToCompute]['balance_sheet']);
 
-      setBsStaticDataTable(compute12monthData(computedStaticDataTable.new[yearToCompute]['balance_sheet']||{}))
-      setPlStaticDataTable(compute12monthData(computedStaticDataTable.new[yearToCompute]['p_and_l']||{}))
-    }
+    //   setBsStaticDataTable(compute12monthData(computedStaticDataTable.new[yearToCompute]['balance_sheet']||{}))
+    //   setPlStaticDataTable(compute12monthData(computedStaticDataTable.new[yearToCompute]['p_and_l']||{}))
+    // }
 }
 
 const getMonthKeyFromMonth=(month)=>{
@@ -173,15 +201,24 @@ const compute12monthData =(_staticDataTable)=>{
 }
 const renderBsData = (year)=>{
   
-  if (computedStaticDataTable.new[year] !== undefined){
+  if (computedStaticDataTable.new !== undefined && computedStaticDataTable.new[year] !== undefined){
     setBsStaticDataTable(compute12monthData(computedStaticDataTable.new[year]['balance_sheet']||{}))
     setPlStaticDataTable(compute12monthData(computedStaticDataTable.new[year]['p_and_l']||{}))
   }
 
-  return yearToCompute
+  return (<p>{yearToCompute}</p>)
 }
-const handleYearChanged=(year)=>{
-  if (computedStaticDataTable.new[year] !== undefined){
+const handleYearChanged=(year,innerComputedStaticDataTable=false)=>{
+  if (innerComputedStaticDataTable!==false){
+    // console.log('year,computedStaticDataTable :>> ', year,innerComputedStaticDataTable);
+  if (innerComputedStaticDataTable.new !== undefined && innerComputedStaticDataTable.new[year] !== undefined){
+    setBsStaticDataTable(compute12monthData(innerComputedStaticDataTable.new[year]['balance_sheet']||{}))
+    setPlStaticDataTable(compute12monthData(innerComputedStaticDataTable.new[year]['p_and_l']||{}))
+  }
+    return
+  }
+  // console.log('year,computedStaticDataTable :>> ', year,computedStaticDataTable);
+  if (computedStaticDataTable.new !== undefined && computedStaticDataTable.new[year] !== undefined){
     setBsStaticDataTable(compute12monthData(computedStaticDataTable.new[year]['balance_sheet']||{}))
     setPlStaticDataTable(compute12monthData(computedStaticDataTable.new[year]['p_and_l']||{}))
   }
@@ -194,7 +231,7 @@ const granTotal = (gran_total)=>{
     return parseFloat(_gran_total.toFixed(2))
   
 }
-console.log('bsStaticDataTable :>> ', bsStaticDataTable);
+// console.log('bsStaticDataTable :>> ', bsStaticDataTable);
     return (
       <div>
       
@@ -211,9 +248,9 @@ console.log('bsStaticDataTable :>> ', bsStaticDataTable);
                 Select year 
               </button>
               <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    {Object.keys(computedStaticDataTable.new||{}).map((year,i)=>(
-                       <button className="dropdown-item" onClick={()=>{handleYearChanged(year)}} key={i} type="button">{year}</button>
-                    ))}
+                    {Object.keys(computedStaticDataTable.new||{}).map((year,i)=>{
+                       return (<button className="dropdown-item" onClick={()=>{handleYearChanged(year)}} key={i} type="button">{year}</button>)
+                    })}
               </div>
             </div>
 
@@ -293,7 +330,7 @@ console.log('bsStaticDataTable :>> ', bsStaticDataTable);
               })
             }
             {plStaticDataTable['total'] !==undefined ?(
-              <tr key={'BS total'}>
+              <tr className="thead-light" key={'BS total'}>
                   <th>{'Total'}</th><th>{plStaticDataTable['total']['01']||0}</th><th>{plStaticDataTable['total']['02']||0}</th><th>{plStaticDataTable['total']['03']||0}</th><th>{plStaticDataTable['total']['04']||0}</th><th>{plStaticDataTable['total']['05']||0}</th><th>{plStaticDataTable['total']['06']||0}</th><th>{plStaticDataTable['total']['07']||0}</th><th>{plStaticDataTable['total']['08']||0}</th><th>{plStaticDataTable['total']['09']||0}</th><th>{plStaticDataTable['total']['10']||0}</th><th>{plStaticDataTable['total']['11']||0}</th><th>{plStaticDataTable['total']['02']||0}</th><th>{plStaticDataTable['total']['gran-total']}</th>
               </tr>
             ):(<></>)
@@ -309,7 +346,7 @@ console.log('bsStaticDataTable :>> ', bsStaticDataTable);
 }
 
 const mapStateToProps = (state) => {
-  // console.log('state :>> ', state);
+  // console.log('state :>> ', state.import_data);
   return {
     import_data: state.import_data,
   };

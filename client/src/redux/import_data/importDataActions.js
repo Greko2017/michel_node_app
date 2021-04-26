@@ -45,9 +45,16 @@ export const importData = (formData) => {
 };
 
 
-export const editImportData = (data) => {
+export const innerEditImportData = (data) => {
     return {
         type: "EDIT_IMPORT_DATA",
         payload: data,
     };
 };
+
+
+export const editImportData = (data) => {
+    return (dispatch) =>{
+        dispatch(innerEditImportData(data))
+    }
+}

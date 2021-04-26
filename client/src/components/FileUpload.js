@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import Message from './Message';
 import Progress from './Progress';
-import axios from 'axios';
+// import axios from 'axios';
 import TableList from './TableList';
 
 import { connect } from 'react-redux'
@@ -46,7 +46,7 @@ const FileUpload = (props) => {
     // console.log('onSubmit :>> ', file);
     const formData = new FormData();
     formData.append('file', file);
-    console.log('onSubmit :>> ', formData);
+    // console.log('onSubmit :>> ', formData);
     try {
       props.importData(formData)
       //  axios.post('/upload', formData, {
@@ -98,7 +98,7 @@ const FileUpload = (props) => {
   };
   const {fileName,filePath,import_data} = props.import_data
   if (import_data.length >=1) {
-    localStorage.setItem('tableData',JSON.stringify(import_data))
+    localStorage.setItem('tableData',JSON.stringify(import_data.slice(0,56111)))
   }
   return (
     <Fragment>

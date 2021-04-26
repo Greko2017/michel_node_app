@@ -17,7 +17,6 @@ export const importDataReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: true,
-                import_data:[],
             };
         case IMPORT_DATA_SUCCESS:
             
