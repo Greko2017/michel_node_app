@@ -89,7 +89,7 @@ export const VarianceQuater = (props) => {
         },0)
 
         tem_value[currKey]['month2']= month2.reduce((prev, currMont2)=>{
-          let currValue = computedStaticDataTable[year1]['balance_sheet'][currKey][currMont2] || 0
+          let currValue = computedStaticDataTable[year2]['balance_sheet'][currKey][currMont2] || 0
           let sum = prev+currValue
           return parseFloat(sum.toFixed(2))
         },0)
@@ -137,7 +137,7 @@ export const VarianceQuater = (props) => {
         },0)
 
         tem_value[currKey]['month2']= month2.reduce((prev, currMont2)=>{
-          let currValue = computedStaticDataTable[year1]['p_and_l'][currKey][currMont2] || 0
+          let currValue = computedStaticDataTable[year2]['p_and_l'][currKey][currMont2] || 0
           let sum = prev+currValue
           return parseFloat(sum.toFixed(2))
         },0)
