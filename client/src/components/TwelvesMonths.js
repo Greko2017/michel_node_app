@@ -206,21 +206,23 @@ const renderBsData = (year)=>{
     setPlStaticDataTable(compute12monthData(computedStaticDataTable.new[year]['p_and_l']||{}))
   }
 
-  return (<p>{yearToCompute}</p>)
+  return yearToCompute
 }
 const handleYearChanged=(year,innerComputedStaticDataTable=false)=>{
   if (innerComputedStaticDataTable!==false){
     // console.log('year,computedStaticDataTable :>> ', year,innerComputedStaticDataTable);
-  if (innerComputedStaticDataTable.new !== undefined && innerComputedStaticDataTable.new[year] !== undefined){
-    setBsStaticDataTable(compute12monthData(innerComputedStaticDataTable.new[year]['balance_sheet']||{}))
-    setPlStaticDataTable(compute12monthData(innerComputedStaticDataTable.new[year]['p_and_l']||{}))
-  }
-    return
+    if (innerComputedStaticDataTable.new !== undefined && innerComputedStaticDataTable.new[year] !== undefined){
+      setBsStaticDataTable(compute12monthData(innerComputedStaticDataTable.new[year]['balance_sheet']||{}))
+      setPlStaticDataTable(compute12monthData(innerComputedStaticDataTable.new[year]['p_and_l']||{}))
+      setYearToCompute(year)
+    }
+      return
   }
   // console.log('year,computedStaticDataTable :>> ', year,computedStaticDataTable);
   if (computedStaticDataTable.new !== undefined && computedStaticDataTable.new[year] !== undefined){
     setBsStaticDataTable(compute12monthData(computedStaticDataTable.new[year]['balance_sheet']||{}))
     setPlStaticDataTable(compute12monthData(computedStaticDataTable.new[year]['p_and_l']||{}))
+    setYearToCompute(year)
   }
 }
 const granTotal = (gran_total)=>{
@@ -231,6 +233,9 @@ const granTotal = (gran_total)=>{
     return parseFloat(_gran_total.toFixed(2))
   
 }
+const formatNumber=(number)=>{
+  return number && number.toString().toLocaleString()
+}
 // console.log('bsStaticDataTable :>> ', bsStaticDataTable);
     return (
       <div>
@@ -240,7 +245,7 @@ const granTotal = (gran_total)=>{
           <div>      
           <div className="row justify-content-between">        
               <div>
-                <h3>12 Months {()=>renderBsData(yearToCompute)}</h3>
+                <h3>12 Months {yearToCompute && yearToCompute}</h3>
               </div>
                 
             <div className="dropdown">
@@ -282,14 +287,14 @@ const granTotal = (gran_total)=>{
                 if (oneKey.includes('total')){return}
                 return (
                   <tr key={i}>
-                      <th>{oneKey}</th><th>{bsStaticDataTable[oneKey]['01']||0}</th><th>{bsStaticDataTable[oneKey]['02']||0}</th><th>{bsStaticDataTable[oneKey]['03']||0}</th><th>{bsStaticDataTable[oneKey]['04']||0}</th><th>{bsStaticDataTable[oneKey]['05']||0}</th><th>{bsStaticDataTable[oneKey]['06']||0}</th><th>{bsStaticDataTable[oneKey]['07']||0}</th><th>{bsStaticDataTable[oneKey]['08']||0}</th><th>{bsStaticDataTable[oneKey]['09']||0}</th><th>{bsStaticDataTable[oneKey]['10']||0}</th><th>{bsStaticDataTable[oneKey]['11']||0}</th><th>{bsStaticDataTable[oneKey]['02']||0}</th><th>{bsStaticDataTable[oneKey]['total']}</th>
+                      <th>{oneKey}</th><td  >{formatNumber(bsStaticDataTable[oneKey]['01']||0)}</td><td>{formatNumber(bsStaticDataTable[oneKey]['02']||0)}</td><td>{formatNumber(bsStaticDataTable[oneKey]['03']||0)}</td><td>{formatNumber(bsStaticDataTable[oneKey]['04']||0)}</td><td>{formatNumber(bsStaticDataTable[oneKey]['05']||0)}</td><td>{formatNumber(bsStaticDataTable[oneKey]['06']||0)}</td><td>{formatNumber(bsStaticDataTable[oneKey]['07']||0)}</td><td>{formatNumber(bsStaticDataTable[oneKey]['08']||0)}</td><td>{formatNumber(bsStaticDataTable[oneKey]['09']||0)}</td><td>{formatNumber(bsStaticDataTable[oneKey]['10']||0)}</td><td>{formatNumber(bsStaticDataTable[oneKey]['11']||0)}</td><td>{formatNumber(bsStaticDataTable[oneKey]['02']||0)}</td><th>{formatNumber(bsStaticDataTable[oneKey]['total'])}</th>
                   </tr>
                   )
               })
             }
             {bsStaticDataTable['total'] !==undefined ?(
               <tr className="thead-light" key={'BS total'}>
-                  <th>{'Total'}</th><th>{bsStaticDataTable['total']['01']||0}</th><th>{bsStaticDataTable['total']['02']||0}</th><th>{bsStaticDataTable['total']['03']||0}</th><th>{bsStaticDataTable['total']['04']||0}</th><th>{bsStaticDataTable['total']['05']||0}</th><th>{bsStaticDataTable['total']['06']||0}</th><th>{bsStaticDataTable['total']['07']||0}</th><th>{bsStaticDataTable['total']['08']||0}</th><th>{bsStaticDataTable['total']['09']||0}</th><th>{bsStaticDataTable['total']['10']||0}</th><th>{bsStaticDataTable['total']['11']||0}</th><th>{bsStaticDataTable['total']['02']||0}</th><th>{bsStaticDataTable['total']['gran-total']}</th>
+                  <th>{'Total'}</th><th>{formatNumber(bsStaticDataTable['total']['01']||0)}</th><th>{formatNumber(bsStaticDataTable['total']['02']||0)}</th><th>{formatNumber(bsStaticDataTable['total']['03']||0)}</th><th>{formatNumber(bsStaticDataTable['total']['04']||0)}</th><th>{formatNumber(bsStaticDataTable['total']['05']||0)}</th><th>{formatNumber(bsStaticDataTable['total']['06']||0)}</th><th>{formatNumber(bsStaticDataTable['total']['07']||0)}</th><th>{formatNumber(bsStaticDataTable['total']['08']||0)}</th><th>{formatNumber(bsStaticDataTable['total']['09']||0)}</th><th>{formatNumber(bsStaticDataTable['total']['10']||0)}</th><th>{formatNumber(bsStaticDataTable['total']['11']||0)}</th><th>{formatNumber(bsStaticDataTable['total']['02']||0)}</th><th>{formatNumber(bsStaticDataTable['total']['gran-total'])}</th>
               </tr>
             ):(<></>)
               }
@@ -324,14 +329,14 @@ const granTotal = (gran_total)=>{
                 if (oneKey.includes('total')){return}
                 return (
                   <tr key={i}>
-                      <th>{oneKey}</th><th>{plStaticDataTable[oneKey]['01']||0}</th><th>{plStaticDataTable[oneKey]['02']||0}</th><th>{plStaticDataTable[oneKey]['03']||0}</th><th>{plStaticDataTable[oneKey]['04']||0}</th><th>{plStaticDataTable[oneKey]['05']||0}</th><th>{plStaticDataTable[oneKey]['06']||0}</th><th>{plStaticDataTable[oneKey]['07']||0}</th><th>{plStaticDataTable[oneKey]['08']||0}</th><th>{plStaticDataTable[oneKey]['09']||0}</th><th>{plStaticDataTable[oneKey]['10']||0}</th><th>{plStaticDataTable[oneKey]['11']||0}</th><th>{plStaticDataTable[oneKey]['02']||0}</th><th>{plStaticDataTable[oneKey]['total']}</th>
+                      <th>{oneKey}</th><td>{formatNumber(plStaticDataTable[oneKey]['01']||0)}</td><td>{formatNumber(plStaticDataTable[oneKey]['02']||0)}</td><td>{formatNumber(plStaticDataTable[oneKey]['03']||0)}</td><td>{formatNumber(plStaticDataTable[oneKey]['04']||0)}</td><td>{formatNumber(plStaticDataTable[oneKey]['05']||0)}</td><td>{formatNumber(plStaticDataTable[oneKey]['06']||0)}</td><td>{formatNumber(plStaticDataTable[oneKey]['07']||0)}</td><td>{formatNumber(plStaticDataTable[oneKey]['08']||0)}</td><td>{formatNumber(plStaticDataTable[oneKey]['09']||0)}</td><td>{formatNumber(plStaticDataTable[oneKey]['10']||0)}</td><td>{formatNumber(plStaticDataTable[oneKey]['11']||0)}</td><td>{formatNumber(plStaticDataTable[oneKey]['02']||0)}</td><th>{formatNumber(plStaticDataTable[oneKey]['total'])}</th>
                   </tr>
                   )
               })
             }
             {plStaticDataTable['total'] !==undefined ?(
               <tr className="thead-light" key={'BS total'}>
-                  <th>{'Total'}</th><th>{plStaticDataTable['total']['01']||0}</th><th>{plStaticDataTable['total']['02']||0}</th><th>{plStaticDataTable['total']['03']||0}</th><th>{plStaticDataTable['total']['04']||0}</th><th>{plStaticDataTable['total']['05']||0}</th><th>{plStaticDataTable['total']['06']||0}</th><th>{plStaticDataTable['total']['07']||0}</th><th>{plStaticDataTable['total']['08']||0}</th><th>{plStaticDataTable['total']['09']||0}</th><th>{plStaticDataTable['total']['10']||0}</th><th>{plStaticDataTable['total']['11']||0}</th><th>{plStaticDataTable['total']['02']||0}</th><th>{plStaticDataTable['total']['gran-total']}</th>
+                  <th>{'Total'}</th><th>{formatNumber(plStaticDataTable['total']['01']||0)}</th><th>{formatNumber(plStaticDataTable['total']['02']||0)}</th><th>{formatNumber(plStaticDataTable['total']['03']||0)}</th><th>{formatNumber(plStaticDataTable['total']['04']||0)}</th><th>{formatNumber(plStaticDataTable['total']['05']||0)}</th><th>{formatNumber(plStaticDataTable['total']['06']||0)}</th><th>{formatNumber(plStaticDataTable['total']['07']||0)}</th><th>{formatNumber(plStaticDataTable['total']['08']||0)}</th><th>{formatNumber(plStaticDataTable['total']['09']||0)}</th><th>{formatNumber(plStaticDataTable['total']['10']||0)}</th><th>{formatNumber(plStaticDataTable['total']['11']||0)}</th><th>{formatNumber(plStaticDataTable['total']['02']||0)}</th><th>{formatNumber(plStaticDataTable['total']['gran-total'])}</th>
               </tr>
             ):(<></>)
               }

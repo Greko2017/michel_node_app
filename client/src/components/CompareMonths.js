@@ -37,7 +37,7 @@ const CompareMonths = (props) => {
     }
 
     const computeCompareMonth = (selectedOptions)=>{
-      // console.log('selectedOptions :>> ', selectedOptions, computedStaticDataTable);
+      console.log('In computeCompareMonth selectedOptions :>> ', selectedOptions, computedStaticDataTable);
       let month1 = convertMonthLtrToNbr(selectedOptions.month1.month)
       let month2 = convertMonthLtrToNbr(selectedOptions.month2.month)
       let year1 = selectedOptions.month1.year
@@ -76,8 +76,11 @@ const CompareMonths = (props) => {
         tem_value[currKey]= tem_value[currKey] || {}
         tem_value[currKey]['month1'] = tem_value[currKey]['month1']  || {}
         // console.log('currKey,month1,month2 :>> ', computedStaticDataTable,currKey,year1,year2,month1,month2);
-        computedStaticDataTable[year1]['balance_sheet'] = computedStaticDataTable[year1]['balance_sheet'] || {}
-        computedStaticDataTable[year2]['balance_sheet'] = computedStaticDataTable[year2]['balance_sheet'] || {}
+        computedStaticDataTable[year1]['balance_sheet'] = computedStaticDataTable[year1]['balance_sheet'] || {currKey:{}}
+        computedStaticDataTable[year2]['balance_sheet'] = computedStaticDataTable[year2]['balance_sheet'] || {currKey:{}}
+        computedStaticDataTable[year1]['balance_sheet'][currKey] = computedStaticDataTable[year1]['balance_sheet'][currKey] || {}
+        computedStaticDataTable[year2]['balance_sheet'][currKey] = computedStaticDataTable[year2]['balance_sheet'][currKey] || {}
+
         tem_value[currKey]['month1']= computedStaticDataTable[year1]['balance_sheet'][currKey][month1] || 0
         tem_value[currKey]['month2']= computedStaticDataTable[year2]['balance_sheet'][currKey][month2] || 0
         tem_value[currKey]['variance']= parseFloat((tem_value[currKey]['month1'] - tem_value[currKey]['month2']).toFixed(2))
@@ -111,6 +114,8 @@ const CompareMonths = (props) => {
         // console.log('currKey,month1,month2 :>> ', currKey,month1,month2);
         computedStaticDataTable[year1]['p_and_l'] = computedStaticDataTable[year1]['p_and_l'] || {}
         computedStaticDataTable[year2]['p_and_l'] = computedStaticDataTable[year2]['p_and_l'] || {}
+        computedStaticDataTable[year1]['p_and_l'][currKey] = computedStaticDataTable[year1]['p_and_l'][currKey] || {}
+        computedStaticDataTable[year2]['p_and_l'][currKey] = computedStaticDataTable[year2]['p_and_l'][currKey] || {}
         tem_value[currKey]['month1']= computedStaticDataTable[year1]['p_and_l'][currKey][month1] || 0
         tem_value[currKey]['month2']= computedStaticDataTable[year2]['p_and_l'][currKey][month2] || 0
         tem_value[currKey]['variance']= parseFloat((tem_value[currKey]['month1'] - tem_value[currKey]['month2']).toFixed(2))
@@ -219,13 +224,19 @@ const CompareMonths = (props) => {
 
         // let result = await compute12monthData(computedStaticDataTable.new[first_year]['balance_sheet'])
         let final_result = years.reduce( async (prev, currYear)=>{
-          	let temp_data = {...prev}
-            temp_data[currYear]=temp_data[currYear]||{}
-            temp_data[currYear]['balance_sheet'] = await compute12monthData(computedStaticDataTable.new[first_year]['balance_sheet'])
-            temp_data[currYear]['p_and_l'] = await compute12monthData(computedStaticDataTable.new[first_year]['p_and_l'])
+          	let temp_data = {...await prev}
+            // console.log('-------------- start :>> ', )
+            // console.log('prev,currYear :>> ', await prev,await currYear);
+            // console.log('before temp_data :>> ', await temp_data);
+            temp_data[currYear]= await temp_data[currYear]||{}
+            temp_data[currYear]['balance_sheet'] = await compute12monthData(computedStaticDataTable.new[await currYear]['balance_sheet'])
+            temp_data[currYear]['p_and_l'] = await compute12monthData(computedStaticDataTable.new[await currYear]['p_and_l'])
+            // console.log('prev :>> ', await prev);
+            // console.log('temp_data :>> ', await temp_data,await currYear);
+            // console.log('-------------- end :>> ', )
             return temp_data
         },{})
-        // console.log('--- final_result :>> ', await final_result);
+        console.log('--- final_result :>> ', await final_result);
         setComputedStaticDataTable(await final_result)
 
 
@@ -233,7 +244,7 @@ const CompareMonths = (props) => {
     
 const compute12monthData =(origin_staticDataTable)=>{
     let _staticDataTable = {...origin_staticDataTable}
-    console.log('_staticDataTable :>> ', _staticDataTable);
+    // console.log('_staticDataTable :>> ', _staticDataTable);
     let _staticDataTableKeys = Object.keys(_staticDataTable).filter(item=>item!=='total')
     let computedData = _staticDataTableKeys instanceof Array && _staticDataTableKeys.length > 0 ?[..._staticDataTableKeys].reduce((previousValue, current_key)=>{
           
@@ -288,7 +299,7 @@ const compute12monthData =(origin_staticDataTable)=>{
   
     },{}):{}
     
-    console.log('computedData :>> ', computedData);
+    // console.log('computedData :>> ', computedData);
     return computedData
   }
 
@@ -301,14 +312,44 @@ const compute12monthData =(origin_staticDataTable)=>{
   
 }
 
+function yearHandleChange(innerEvent){
+// console.log('--- innerEvent :>> ',innerEvent.target.value);
+      let value = innerEvent.target.value.split(',')
+      let e = document.getElementById(`month${parseInt(value[0])}`);
+      let month= e.value.split(',')[1];
+
+      console.log('year innerEvent :>> ', value, 'month :>> ',month, 'year :>> ',value[1]);
+      let newSelectedOptions ={...selectedOptions}
+      if (value[0] ==='1'){
+        newSelectedOptions['month1'] = {'month':month, 'year':value[1]}
+        if ( Object.values(newSelectedOptions['month2']).length <= 0 ){
+          newSelectedOptions['month2'] = {'month':'Jan', 'year':value[1]}
+        }
+        setSelectedOptions(prevValue => {
+          localStorage.setItem('SelectedOptions',JSON.stringify(newSelectedOptions))
+          return newSelectedOptions
+        })
+      }
+      if (value[0] ==='2'){
+        newSelectedOptions['month2'] = {'month':month, 'year':value[1]}
+        if (Object.values(newSelectedOptions['month1']).length <= 0 ){
+          newSelectedOptions['month1'] = {'month':'Jan', 'year':value[1]}
+        }
+        setSelectedOptions(prevValue => {
+          localStorage.setItem('SelectedOptions',JSON.stringify(newSelectedOptions))
+          return newSelectedOptions
+        })
+      }
+  }
+
   function handleChange(innerEvent){
     // async function innerHandleChange(innerEvent){
-
+// console.log('--- innerEvent :>> ',innerEvent.target.value);
         let value = innerEvent.target.value.split(',')
         let e = document.getElementById(`year${parseInt(value[0])}`);
-        let year= e.value;
+        let year= e.value.split(',')[1];
 
-        console.log('innerEvent :>> ', value[1], 'month :>> ',value[0], 'year :>> ',year);
+        console.log('month innerEvent :>> ', value[1], 'month :>> ',value[0], 'year :>> ',year);
         let newSelectedOptions ={...selectedOptions}
         if (value[0] ==='1'){
           newSelectedOptions['month1'] = {'month':value[1], 'year':year}
@@ -330,11 +371,6 @@ const compute12monthData =(origin_staticDataTable)=>{
             return newSelectedOptions
           })
         }
-        // computeCompareMonth(selectedOptions)
-      // }
-      // innerHandleChange(event)
-
-        // computeMonthsCompareData(props.import_data)
     }
     const monthDropDownValues = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
     return (
@@ -345,6 +381,9 @@ const compute12monthData =(origin_staticDataTable)=>{
                     <label htmlFor="month1">Month 1</label>
                     <select onChange={handleChange} className="form-control ml-2" id="month1" style={{minWidth:60}}>
 
+                    {/* <option value={`1,${selectedOptions.month1.month}`} key={'month1'} selected="selected">
+                      {`${selectedOptions.month1 && selectedOptions.month1.month}`}
+                      </option> */}
                     {monthDropDownValues.map((month,i)=>{
                         return (
                         <option value={`1,${month}`} key={i}>{month}</option>
@@ -352,11 +391,14 @@ const compute12monthData =(origin_staticDataTable)=>{
                     })}
                     </select>
 
-                    <select onChange={handleChange} className="form-control mr-5" id="year1" style={{minWidth:100}}>
+                    <select onChange={yearHandleChange} className="form-control mr-5" id="year1" style={{minWidth:100}}>
+                    
+                    {/* <option value={`1,${selectedOptions.month1.year}`} key={'year1'} selected="selected">
+                      {`${selectedOptions.month1 && selectedOptions.month1.year}`}
+                      </option> */}
                     {years.map((year,i)=>{
-                        
                         return (
-                        <option value={year} key={i}>{year}</option>
+                        <option value={`1,${year}`} key={i}>{year}</option>
                         )
                     })}
                     </select>
@@ -365,6 +407,9 @@ const compute12monthData =(origin_staticDataTable)=>{
                 <div className="form-group">
                     <label htmlFor="month2">Month 2</label>
                     <select onChange={handleChange} className="form-control ml-2" id="month2" style={{minWidth:60}}>
+                    {/* <option value={`1,${selectedOptions.month2.month}`} key={'month2'} selected="selected">
+                      {`${selectedOptions.month2 && selectedOptions.month2.month}`}
+                      </option> */}
                     {monthDropDownValues.map((month,i)=>{
                         
                         return (
@@ -373,11 +418,14 @@ const compute12monthData =(origin_staticDataTable)=>{
                     })}
                     </select>
 
-                    <select onChange={handleChange} className="form-control mr-3" id="year2" style={{minWidth:100}}>
+                    <select onChange={yearHandleChange} className="form-control mr-3" id="year2" style={{minWidth:100}}>
+                    {/* <option value={`1,${selectedOptions.month2.year}`} key={'year2'} selected="selected">
+                      {`${selectedOptions.month2 && selectedOptions.month2.year}`}
+                      </option> */}
                     {years.map((year,i)=>{
                         
                         return (
-                        <option value={year} key={i}>{year}</option>
+                        <option value={`2,${year}`} key={i}>{year}</option>
                         )
                     })}
                     </select>
@@ -396,8 +444,8 @@ const compute12monthData =(origin_staticDataTable)=>{
                 <th style={{borderRightColor:"#fff"}}></th>
                 <th style={{borderRightColor:"#fff"}}></th>
                 <th ></th>
-                <th scope="col">{selectedOptions.month1.month || 'Jan'}</th>
-                <th scope="col">{selectedOptions.month2.month || 'Jan'}</th>
+                <th scope="col">{`${selectedOptions.month1.month} ${selectedOptions.month1.year}` || 'Jan'}</th>
+                <th scope="col">{`${selectedOptions.month2.month} ${selectedOptions.month2.year}` || 'Jan'}</th>
                 <th scope="col">variance</th>
                 <th scope="col">variance %</th>
                 </tr>
@@ -436,8 +484,8 @@ const compute12monthData =(origin_staticDataTable)=>{
                 <th style={{borderRightColor:"#fff"}}></th>
                 <th style={{borderRightColor:"#fff"}}></th>
                 <th ></th>
-                <th scope="col">{selectedOptions.month1.month || 'Jan'}</th>
-                <th scope="col">{selectedOptions.month2.month || 'Jan'}</th>
+                <th scope="col">{`${selectedOptions.month1.month} ${selectedOptions.month1.year}` || 'Jan'}</th>
+                <th scope="col">{`${selectedOptions.month2.month} ${selectedOptions.month2.year}` || 'Jan'}</th>
                 <th scope="col">variance</th>
                 <th scope="col">variance %</th>
                 </tr>

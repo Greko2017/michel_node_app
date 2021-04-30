@@ -1,0 +1,211 @@
+gl_date;Abr;Parent Account for Nature View;Currency;actual_amount
+2020-04-24;4;093 - FixedAssetsSoftware;OD;164.93
+2020-04-24;4;224 - Personal Capital;OD;-164.93
+2020-05-08;5;224 - Personal Capital;OD;-31.5
+2020-05-08;5;416 - Tax;OD;31.5
+2020-05-18;5;224 - Personal Capital;OD;-31.5
+2020-05-18;5;416 - Tax;OD;31.5
+2020-05-26;5;224 - Personal Capital;OD;-117.6
+2020-05-26;5;430 - Freight Courrier;OD;117.6
+2020-06-04;6;224 - Personal Capital;OD;-1075.24
+2020-06-04;6;303 -COGS Web Dvt;OD;1075.24
+2020-06-28;6;093 - FixedAssetsComputer;OD;230.71
+2020-06-28;6;224 - Personal Capital;OD;-45.01
+2020-06-28;6;224 - Personal Capital;OD;-230.71
+2020-06-28;6;422 - Computer Related Charges;OD;45.01
+2020-07-25;7;224 - Personal Capital;OD;-1.99
+2020-07-25;7;054 - PrepdExp;OD;1
+2020-07-25;7;303 -COGS Web Dvt;OD;0.99
+2020-07-31;7;224 - Personal Capital;OD;-15.73
+2020-07-31;7;303 -COGS Web Dvt;OD;15.73
+2020-08-12;8;224 - Personal Capital;OD;-1.08
+2020-08-12;8;409 - Communications Internet;OD;1.08
+2020-08-21;8;224 - Personal Capital;OD;-111.89
+2020-08-21;8;224 - Personal Capital;OD;-13.99
+2020-08-21;8;303 -COGS Web Dvt;OD;111.89
+2020-08-21;8;303 -COGS Web Dvt;OD;13.99
+2020-08-22;8;224 - Personal Capital;OD;-22.75
+2020-08-22;8;409 - CommunicationsTelephone;OD;22.75
+2020-08-23;8;224 - Personal Capital;OD;-20.96
+2020-08-23;8;303 -COGS Web Dvt;OD;20.96
+2020-08-24;8;224 - Personal Capital;OD;-6.99
+2020-08-24;8;303 -COGS Web Dvt;OD;6.99
+2020-08-25;8;224 - Personal Capital;OD;-20.36
+2020-08-25;8;303 -COGS Web Dvt;OD;20.36
+2020-08-31;8;224 - Personal Capital;OD;-27.71
+2020-08-31;8;303 -COGS Web Dvt;OD;27.71
+2020-09-05;9;224 - Personal Capital;OD;-27.76
+2020-09-05;9;303 -COGS Web Dvt;OD;27.76
+2020-09-14;9;224 - Personal Capital;OD;-18
+2020-09-14;9;409 - Marketing Advert;OD;18
+2020-09-16;9;224 - Personal Capital;OD;-6.97
+2020-09-16;9;303 -COGS Web Dvt;OD;6.97
+2020-09-22;9;224 - Personal Capital;OD;-18.08
+2020-09-22;9;409 - CommunicationsTelephone;OD;18.08
+2020-09-30;9;224 - Personal Capital;OD;-21.26
+2020-09-30;9;303 -COGS Web Dvt;OD;21.26
+2020-10-12;10;224 - Personal Capital;OD;-139.5
+2020-10-12;10;224 - Personal Capital;OD;-20.82
+2020-10-12;10;303 -COGS Web Dvt;OD;139.5
+2020-10-12;10;303 -COGS Web Dvt;OD;20.82
+2020-10-19;10;224 - Personal Capital;OD;-30
+2020-10-19;10;409 - Marketing Advert;OD;30
+2020-10-22;10;224 - Personal Capital;OD;-18.38
+2020-10-22;10;409 - CommunicationsTelephone;OD;18.38
+2020-11-02;11;224 - Personal Capital;OD;-20
+2020-11-02;11;409 - Marketing Advert;OD;20
+2020-11-09;11;224 - Personal Capital;OD;-13.81
+2020-11-09;11;303 -COGS Web Dvt;OD;13.81
+2020-11-12;11;093 - FixedAssetsSoftware;OD;25.41
+2020-11-12;11;224 - Personal Capital;OD;-13.89
+2020-11-12;11;224 - Personal Capital;OD;-25.41
+2020-11-12;11;224 - Personal Capital;OD;-1.44
+2020-11-12;11;303 -COGS Web Dvt;OD;13.89
+2020-11-12;11;303 -COGS Web Dvt;OD;1.44
+2020-11-14;11;224 - Personal Capital;OD;-12.17
+2020-11-14;11;224 - Personal Capital;OD;-13.91
+2020-11-14;11;303 -COGS Web Dvt;OD;12.17
+2020-11-14;11;303 -COGS Web Dvt;OD;13.91
+2020-11-15;11;224 - Personal Capital;OD;-1.12
+2020-11-15;11;303 -COGS Web Dvt;OD;1.12
+2020-11-16;11;224 - Personal Capital;OD;-13.91
+2020-11-16;11;303 -COGS Web Dvt;OD;13.91
+2020-11-18;11;224 - Personal Capital;OD;-6.93
+2020-11-18;11;224 - Personal Capital;OD;-138.52
+2020-11-18;11;303 -COGS Web Dvt;OD;6.93
+2020-11-18;11;303 -COGS Web Dvt;OD;138.52
+2020-11-22;11;224 - Personal Capital;OD;-18.08
+2020-11-22;11;409 - CommunicationsTelephone;OD;18.08
+2020-11-25;11;224 - Personal Capital;OD;-26.88
+2020-11-25;11;409 - Marketing Advert;OD;26.88
+2020-11-30;11;224 - Personal Capital;OD;-955.85
+2020-11-30;11;303 -COGS Web Dvt;OD;955.85
+2020-12-07;12;224 - Personal Capital;OD;-1456.79
+2020-12-07;12;303 -COGS Web Dvt;OD;1456.79
+2020-12-14;12;224 - Personal Capital;OD;-1621
+2020-12-14;12;303 -COGS Web Dvt;OD;1621
+2020-12-17;12;224 - Personal Capital;OD;-27.01
+2020-12-17;12;303 -COGS Web Dvt;OD;27.01
+2020-12-20;12;224 - Personal Capital;OD;-20.27
+2020-12-20;12;224 - Personal Capital;OD;-28.38
+2020-12-20;12;303 -COGS Web Dvt;OD;20.27
+2020-12-20;12;303 -COGS Web Dvt;OD;28.38
+2020-12-21;12;224 - Personal Capital;OD;-1641.9
+2020-12-21;12;303 -COGS Web Dvt;OD;1641.9
+2020-12-22;12;093 - FixedAssetsComputer;OD;673.11
+2020-12-22;12;224 - Personal Capital;OD;-13.68
+2020-12-22;12;224 - Personal Capital;OD;-136.83
+2020-12-22;12;224 - Personal Capital;OD;-673.11
+2020-12-22;12;224 - Personal Capital;OD;-18.08
+2020-12-22;12;303 -COGS Web Dvt;OD;13.68
+2020-12-22;12;303 -COGS Web Dvt;OD;136.83
+2020-12-22;12;409 - CommunicationsTelephone;OD;18.08
+2020-12-26;12;224 - Personal Capital;OD;-189.92
+2020-12-26;12;303 -COGS Web Dvt;OD;189.92
+2020-12-28;12;224 - Personal Capital;OD;-1788
+2020-12-28;12;303 -COGS Web Dvt;OD;1788
+2020-12-30;12;224 - Personal Capital;OD;-31.5
+2020-12-30;12;416 - Tax;OD;31.5
+2021-01-04;1;299-Profit or Loss Prior Year;OD;10053.94
+2021-01-04;1;224 - Personal Capital;OD;-809.17
+2021-01-04;1;224 - Personal Capital;OD;-134.86
+2021-01-04;1;224 - Personal Capital;OD;-54.06
+2021-01-05;1;224 - Personal Capital;OD;-101.5
+2021-01-06;1;224 - Personal Capital;OD;-272.16
+2021-01-13;1;224 - Personal Capital;OD;-40.37
+2021-01-13;1;224 - Personal Capital;OD;-67.3
+2021-01-15;1;224 - Personal Capital;OD;-7.24
+2021-01-18;1;224 - Personal Capital;OD;-35.88
+2021-01-18;1;224 - Personal Capital;OD;-1459.69
+2021-01-20;1;224 - Personal Capital;OD;-0.8
+2021-01-20;1;224 - Personal Capital;OD;-16.15
+2021-01-20;1;224 - Personal Capital;OD;-53.84
+2021-01-22;1;224 - Personal Capital;OD;-33.64
+2021-01-22;1;224 - Personal Capital;OD;-12.03
+2021-01-23;1;224 - Personal Capital;OD;-107.65
+2021-01-25;1;224 - Personal Capital;OD;-1619
+2021-01-26;1;224 - Personal Capital;OD;-33.74
+2021-01-27;1;224 - Personal Capital;OD;-67.49
+2021-02-02;2;224 - Personal Capital;OD;-1480.69
+2021-02-03;2;224 - Personal Capital;OD;-3.21
+2021-02-03;2;224 - Personal Capital;OD;-20.3
+2021-02-04;2;224 - Personal Capital;OD;-88.16
+2021-02-08;2;224 - Personal Capital;OD;-351.5
+2021-02-09;2;224 - Personal Capital;OD;-1523.22
+2021-02-10;2;224 - Personal Capital;OD;-7.24
+2021-02-10;2;224 - Personal Capital;OD;-2.66
+2021-02-10;2;224 - Personal Capital;OD;-3.6
+2021-02-12;2;224 - Personal Capital;OD;-30
+2021-02-14;2;224 - Personal Capital;OD;-3.74
+2021-02-14;2;224 - Personal Capital;OD;-6
+2021-02-15;2;224 - Personal Capital;OD;-1.96
+2021-02-15;2;224 - Personal Capital;OD;-30
+2021-02-15;2;224 - Personal Capital;OD;-1152.91
+2021-01-24;1;224 - Personal Capital;OD;-40.36
+2021-02-16;2;224 - Personal Capital;OD;-30
+2021-02-22;2;224 - Personal Capital;OD;-1216
+2021-02-22;2;224 - Personal Capital;OD;-12.72
+2021-03-01;3;224 - Personal Capital;OD;-693.06
+2021-03-02;3;224 - Personal Capital;OD;-11.49
+2021-03-05;3;224 - Personal Capital;OD;-5.25
+2021-03-08;3;224 - Personal Capital;OD;-751.03
+2021-03-09;3;224 - Personal Capital;OD;-19.59
+2021-03-15;3;224 - Personal Capital;OD;-323.72
+2021-03-22;3;224 - Personal Capital;OD;-33.11
+2021-04-05;4;224 - Personal Capital;OD;-19.36
+2021-04-08;4;224 - Personal Capital;OD;-33.33
+2021-04-10;4;224 - Personal Capital;OD;-40
+2021-04-15;4;224 - Personal Capital;OD;-8.32
+2021-04-19;4;224 - Personal Capital;OD;-20
+2021-04-19;4;224 - Personal Capital;OD;-300
+2021-04-19;4;005 - CashEquiv;OD;20
+2021-04-19;4;005 - CashEquiv;OD;300
+2021-01-04;1;303 -COGS Web Dvt;OD;809.17
+2021-01-04;1;303 -COGS Web Dvt;OD;134.86
+2021-01-04;1;303 -COGS Web Dvt;OD;54.06
+2021-01-13;1;303 -COGS Web Dvt;OD;40.37
+2021-01-13;1;303 -COGS Web Dvt;OD;67.3
+2021-01-15;1;303 -COGS Web Dvt;OD;7.24
+2021-01-18;1;303 -COGS Web Dvt;OD;1459.69
+2021-01-20;1;303 -COGS Web Dvt;OD;0.8
+2021-01-20;1;303 -COGS Web Dvt;OD;16.15
+2021-01-20;1;303 -COGS Web Dvt;OD;53.84
+2021-01-22;1;303 -COGS Web Dvt;OD;33.64
+2021-01-23;1;303 -COGS Web Dvt;OD;107.65
+2021-01-24;1;303 -COGS Web Dvt;OD;40.36
+2021-01-25;1;303 -COGS Web Dvt;OD;1619
+2021-01-26;1;303 -COGS Web Dvt;OD;33.74
+2021-01-27;1;303 -COGS Web Dvt;OD;67.49
+2021-02-02;2;303 -COGS Web Dvt;OD;1480.69
+2021-02-03;2;303 -COGS Web Dvt;OD;3.21
+2021-02-03;2;303 -COGS Web Dvt;OD;20.3
+2021-02-04;2;303 -COGS Web Dvt;OD;88.16
+2021-02-09;2;303 -COGS Web Dvt;OD;1523.22
+2021-02-10;2;303 -COGS Web Dvt;OD;7.24
+2021-02-15;2;303 -COGS Web Dvt;OD;1152.91
+2021-02-22;2;303 -COGS Web Dvt;OD;1216
+2021-03-01;3;303 -COGS Web Dvt;OD;693.06
+2021-03-08;3;303 -COGS Web Dvt;OD;751.03
+2021-03-09;3;303 -COGS Web Dvt;OD;19.59
+2021-03-15;3;303 -COGS Web Dvt;OD;323.72
+2021-03-22;3;303 -COGS Web Dvt;OD;33.11
+2021-04-05;4;303 -COGS Web Dvt;OD;19.36
+2021-04-08;4;303 -COGS Web Dvt;OD;33.33
+2021-01-06;1;430 - Freight Courrier;OD;272.16
+2021-01-18;1;430 - Freight Courrier;OD;35.88
+2021-03-05;3;430 - Freight Courrier;OD;5.25
+2021-02-10;2;409 - Marketing Advert;OD;2.66
+2021-02-10;2;409 - Marketing Advert;OD;3.6
+2021-02-12;2;409 - Marketing Advert;OD;30
+2021-02-14;2;409 - Marketing Advert;OD;3.74
+2021-02-14;2;409 - Marketing Advert;OD;6
+2021-02-15;2;409 - Marketing Advert;OD;1.96
+2021-02-15;2;409 - Marketing Advert;OD;30
+2021-02-16;2;409 - Marketing Advert;OD;30
+2021-03-02;3;409 - Marketing Advert;OD;11.49
+2021-04-10;4;409 - Marketing Advert;OD;40
+2021-04-15;4;409 - Marketing Advert;OD;8.32
+2021-01-22;1;409 - CommunicationsTelephone;OD;12.03
+2021-02-22;2;409 - CommunicationsTelephone;OD;12.72
+2021-01-05;1;415-Licenses and Permits;OD;101.5
+2021-02-08;2;415-Licenses and Permits;OD;351.5
